@@ -1,0 +1,1569 @@
+{
+  "questions": [
+    {
+      "id": 1,
+      "chapter": 1,
+      "topic": "SDN Architecture",
+      "text": "SDN requires the control and forwarding planes to be separated.",
+      "options": ["True", "False"],
+      "correctAnswer": 0,
+      "difficulty": "easy",
+      "explanation": "SDN (Software Defined Networking) fundamentally separates the control plane (decision making) from the forwarding plane (packet forwarding)."
+    },
+    {
+      "id": 2,
+      "chapter": 4,
+      "topic": "IP Routing",
+      "text": "When forwarding a data packet, a router needs to change the destination IP address of the packet.",
+      "options": ["True", "False"],
+      "correctAnswer": 1,
+      "difficulty": "medium",
+      "explanation": "Routers do not change destination IP addresses during normal forwarding - only source/destination MAC addresses in the frame header are changed. Destination IP changes only occur in NAT."
+    },
+    {
+      "id": 3,
+      "chapter": 16,
+      "topic": "WLAN Configuration",
+      "text": "Only one SSID can be bound to each radio of an AP.",
+      "options": ["True", "False"],
+      "correctAnswer": 1,
+      "difficulty": "medium",
+      "explanation": "Multiple SSIDs can be bound to each AP radio, allowing different wireless networks to be served from the same physical access point."
+    },
+    {
+      "id": 4,
+      "chapter": 15,
+      "topic": "DHCP Protocol",
+      "text": "A DHCP Offer packet can carry only one DNS server address.",
+      "options": ["True", "False"],
+      "correctAnswer": 1,
+      "difficulty": "medium",
+      "explanation": "DHCP Offer packets can carry multiple DNS server addresses through the DNS Server option (option 6)."
+    },
+    {
+      "id": 5,
+      "chapter": 6,
+      "topic": "OSPF Areas",
+      "text": "A router in the backbone area has complete LSEDBs of routers in other areas.",
+      "options": ["True", "False"],
+      "correctAnswer": 1,
+      "difficulty": "hard",
+      "explanation": "Backbone area routers only have summarized route information from other areas, not complete LSDBs. ABRs summarize inter-area routes."
+    },
+    {
+      "id": 6,
+      "chapter": 6,
+      "topic": "OSPF Configuration",
+      "text": "The router ID of the OSPF process takes effect immediately after being changed.",
+      "options": ["True", "False"],
+      "correctAnswer": 1,
+      "difficulty": "medium",
+      "explanation": "OSPF Router ID changes typically require restarting the OSPF process or router reboot to take effect."
+    },
+    {
+      "id": 7,
+      "chapter": 16,
+      "topic": "CAPWAP Protocol",
+      "text": "CAPWAP control tunnels and data tunnels use the same port number.",
+      "options": ["True", "False"],
+      "correctAnswer": 1,
+      "difficulty": "hard",
+      "explanation": "CAPWAP uses different port numbers for control (UDP 5246) and data (UDP 5247) tunnels."
+    },
+    {
+      "id": 8,
+      "chapter": 6,
+      "topic": "OSPF DR/BDR",
+      "text": "OSPF selects one DR and multiple BDRs to ensure backup.",
+      "options": ["True", "False"],
+      "correctAnswer": 1,
+      "difficulty": "medium",
+      "explanation": "OSPF elects exactly one Designated Router (DR) and one Backup Designated Router (BDR) per multi-access network."
+    },
+    {
+      "id": 9,
+      "chapter": 16,
+      "topic": "AP Management",
+      "text": "The working mode of an AP cannot be changed.",
+      "options": ["True", "False"],
+      "correctAnswer": 1,
+      "difficulty": "easy",
+      "explanation": "AP working modes (Fat AP, Fit AP) can be changed through configuration."
+    },
+    {
+      "id": 10,
+      "chapter": 19,
+      "topic": "IPv6 Addressing",
+      "text": "The IPv6 address 2001:ABEF:224EFFE2:BCCC:CDOO:DDBE:8D58 cannot be abbreviated.",
+      "options": ["True", "False"],
+      "correctAnswer": 1,
+      "difficulty": "medium",
+      "explanation": "This IPv6 address can be abbreviated using standard IPv6 abbreviation rules (removing leading zeros, using :: for consecutive zeros)."
+    },
+    {
+      "id": 11,
+      "chapter": 20,
+      "topic": "MPLS",
+      "text": "The MPLS label header is encapsulated between the data link layer header and the network layer header.",
+      "options": ["True", "False"],
+      "correctAnswer": 0,
+      "difficulty": "hard",
+      "explanation": "MPLS labels are inserted between Layer 2 and Layer 3 headers, creating a 2.5 layer encapsulation."
+    },
+    {
+      "id": 12,
+      "chapter": 13,
+      "topic": "AAA",
+      "text": "A NAS performs domain-based user management. A domain is a group of users and each user belongs to a domain.",
+      "options": ["True", "False"],
+      "correctAnswer": 0,
+      "difficulty": "medium",
+      "explanation": "Network Access Server (NAS) uses domains to group users and apply specific authentication, authorization, and accounting policies."
+    },
+    {
+      "id": 13,
+      "chapter": 16,
+      "topic": "WLAN Discovery",
+      "text": "STAB can discover a WLAN only when APs send Beacon frames.",
+      "options": ["True", "False"],
+      "correctAnswer": 1,
+      "difficulty": "medium",
+      "explanation": "STAs can discover WLANs through both passive listening (Beacon frames) and active probing (Probe Request/Response)."
+    },
+    {
+      "id": 14,
+      "chapter": 4,
+      "topic": "IP Addressing",
+      "text": "The broadcast address of the network segment 192.168.1.0/25 is 192.168.1.128.",
+      "options": ["True", "False"],
+      "correctAnswer": 1,
+      "difficulty": "medium",
+      "explanation": "/25 mask creates subnets of 128 addresses. 192.168.1.0/25 range is 192.168.1.0-127, so broadcast is 192.168.1.127, not 192.168.1.128."
+    },
+    {
+      "id": 15,
+      "chapter": 14,
+      "topic": "NAT",
+      "text": "When static NAT is configured, the destination address in packets does not change when accessing the Internet.",
+      "options": ["True", "False"],
+      "correctAnswer": 0,
+      "difficulty": "medium",
+      "explanation": "In static NAT, the source IP is changed from private to public when going to Internet, but destination IP remains unchanged for incoming packets to the server."
+    },
+    {
+      "id": 16,
+      "chapter": 4,
+      "topic": "ARP Protocol",
+      "text": "The ARP protocol can resolve the MAC address of a destination device from the corresponding destination IP address.",
+      "options": ["True", "False"],
+      "correctAnswer": 0,
+      "difficulty": "easy",
+      "explanation": "ARP maps IP addresses to MAC addresses within the same broadcast domain."
+    },
+    {
+      "id": 17,
+      "chapter": 2,
+      "topic": "Network Protocols",
+      "text": "When the host accesses web service of the server, the value of the 'Protocol' field at the network layer is 6.",
+      "options": ["True", "False"],
+      "correctAnswer": 0,
+      "difficulty": "medium",
+      "explanation": "Protocol field value 6 indicates TCP, which is used for HTTP/HTTPS web services."
+    },
+    {
+      "id": 18,
+      "chapter": 9,
+      "topic": "STP",
+      "text": "For STP, the default root path cost of the root bridge is 0.",
+      "options": ["True", "False"],
+      "correctAnswer": 0,
+      "difficulty": "medium",
+      "explanation": "The root bridge has a root path cost of 0, as it is the reference point for all other bridges."
+    },
+    {
+      "id": 19,
+      "chapter": 2,
+      "topic": "Ethernet Frames",
+      "text": "If the value of the 'Type/Length' field of an Ethernet data frame is 0x0800, the length range of the upper-layer packet header carried by the data frame is from 20B to 60B.",
+      "options": ["True", "False"],
+      "correctAnswer": 0,
+      "difficulty": "hard",
+      "explanation": "0x0800 indicates IPv4, whose header length is 20-60 bytes depending on IP options."
+    },
+    {
+      "id": 20,
+      "chapter": 3,
+      "topic": "VRP File Management",
+      "text": "Files cannot be permanently deleted using the delete or delete /unreserved command. To permanently delete them, you need to delete the files in the recycle bin.",
+      "options": ["True", "False"],
+      "correctAnswer": 1,
+      "difficulty": "medium",
+      "explanation": "delete /unreserved permanently deletes files without moving them to recycle bin."
+    },
+    {
+      "id": 21,
+      "chapter": 19,
+      "topic": "IPv6 Addressing",
+      "text": "::1/128 is an IPv6 loopback address.",
+      "options": ["True", "False"],
+      "correctAnswer": 0,
+      "difficulty": "easy",
+      "explanation": "::1/128 is the IPv6 loopback address, equivalent to 127.0.0.1 in IPv4."
+    },
+    {
+      "id": 22,
+      "chapter": 8,
+      "topic": "VLAN Interfaces",
+      "text": "The IP addresses of VLANIF interfaces on the same switch must be different.",
+      "options": ["True", "False"],
+      "correctAnswer": 0,
+      "difficulty": "medium",
+      "explanation": "Each VLANIF interface represents a different Layer 3 interface and must have unique IP addresses."
+    },
+    {
+      "id": 23,
+      "chapter": 6,
+      "topic": "OSPF States",
+      "text": "The router that runs OSPF first enters the Full state and then synchronizes the LSDB.",
+      "options": ["True", "False"],
+      "correctAnswer": 1,
+      "difficulty": "hard",
+      "explanation": "OSPF routers synchronize their LSDBs before entering the Full state. Full state indicates complete database synchronization."
+    },
+    {
+      "id": 24,
+      "chapter": 5,
+      "topic": "Static Routing",
+      "text": "On an interface that uses PPP as the data link layer protocol, you can configure a static route by specifying a next-hop address or outbound interface.",
+      "options": ["True", "False"],
+      "correctAnswer": 0,
+      "difficulty": "medium",
+      "explanation": "PPP interfaces are point-to-point, so static routes can use either next-hop address or outbound interface."
+    },
+    {
+      "id": 25,
+      "chapter": 6,
+      "topic": "OSPF Areas",
+      "text": "A router in the backbone area has complete LSDBs of routers in other areas.",
+      "options": ["True", "False"],
+      "correctAnswer": 1,
+      "difficulty": "hard",
+      "explanation": "Backbone routers only have summarized routes from other areas, not complete LSDBs."
+    },
+    {
+      "id": 26,
+      "chapter": 6,
+      "topic": "OSPF Configuration",
+      "text": "The router ID of the OSPF process takes effect immediately after being changed.",
+      "options": ["True", "False"],
+      "correctAnswer": 1,
+      "difficulty": "medium",
+      "explanation": "OSPF Router ID changes require process restart to take effect."
+    },
+    {
+      "id": 27,
+      "chapter": 9,
+      "topic": "STP",
+      "text": "When redundant links exist on a switching network, STP can be used to eliminate loops.",
+      "options": ["True", "False"],
+      "correctAnswer": 0,
+      "difficulty": "easy",
+      "explanation": "Spanning Tree Protocol's primary function is to prevent Layer 2 loops while maintaining redundancy."
+    },
+    {
+      "id": 28,
+      "chapter": 2,
+      "topic": "Ethernet Frames",
+      "text": "If the value of the 'Type/Length' field of an Ethernet data frame is 0x0800, the length range of the upper-layer packet header carried by the data frame is from 20B to 60B.",
+      "options": ["True", "False"],
+      "correctAnswer": 0,
+      "difficulty": "hard",
+      "explanation": "0x0800 indicates IPv4 with header length of 20-60 bytes."
+    },
+    {
+      "id": 29,
+      "chapter": 8,
+      "topic": "VLAN Tagging",
+      "text": "After ping command execution, LSW1 receives a tagged data frame from VLAN 10 on LSW2.",
+      "options": ["True", "False"],
+      "correctAnswer": 0,
+      "difficulty": "hard",
+      "explanation": "Depending on trunk configuration and native VLAN settings, frames may be tagged or untagged."
+    },
+    {
+      "id": 30,
+      "chapter": 14,
+      "topic": "NAPT",
+      "text": "NAPT differentiates IP addresses of different users based on protocol ID in TCP, UDP, or IP packets.",
+      "options": ["True", "False"],
+      "correctAnswer": 1,
+      "difficulty": "hard",
+      "explanation": "NAPT uses source port numbers to differentiate between multiple private IP addresses mapped to a single public IP."
+    },
+    {
+      "id": 31,
+      "chapter": 2,
+      "topic": "Network Protocols",
+      "text": "When the host accesses web service of the server, the value of the 'Protocol' field at the network layer is 6.",
+      "options": ["True", "False"],
+      "correctAnswer": 0,
+      "difficulty": "medium",
+      "explanation": "Protocol field value 6 indicates TCP for web services."
+    },
+    {
+      "id": 32,
+      "chapter": 9,
+      "topic": "RSTP",
+      "text": "In RSTP mode, interfaces in the Discarding state discard received data frames but maintain the MAC address table based on received data frames.",
+      "options": ["True", "False"],
+      "correctAnswer": 1,
+      "difficulty": "hard",
+      "explanation": "RSTP Discarding state discards data frames but continues to process BPDUs and learn MAC addresses."
+    },
+    {
+      "id": 33,
+      "chapter": 5,
+      "topic": "Routing Selection",
+      "text": "For multiple paths to the same destination network, the router needs to compare the preference values of the paths. If the preference values are the same, the router selects the paths based on the cost value.",
+      "options": ["True", "False"],
+      "correctAnswer": 0,
+      "difficulty": "medium",
+      "explanation": "Routing decisions: compare administrative distance (preference), then metric (cost) if preferences are equal."
+    },
+    {
+      "id": 34,
+      "chapter": 16,
+      "topic": "WLAN Management",
+      "text": "An AC transmits management packets to Fit APs through CAPWAP control tunnels.",
+      "options": ["True", "False"],
+      "correctAnswer": 0,
+      "difficulty": "medium",
+      "explanation": "AC uses CAPWAP control tunnels (UDP 5246) for management communication with Fit APs."
+    },
+    {
+      "id": 35,
+      "chapter": 4,
+      "topic": "IP Addressing",
+      "text": "If a network's address is 192.168.1.0, the broadcast address of the network is 192.168.1.255.",
+      "options": ["True", "False"],
+      "correctAnswer": 0,
+      "difficulty": "easy",
+      "explanation": "For a Class C network 192.168.1.0/24, the broadcast address is indeed 192.168.1.255."
+    },
+    {
+      "id": 36,
+      "chapter": 4,
+      "topic": "IP Addressing",
+      "text": "If a network's address is 192.168.1.0, the broadcast address of the network is 192.168.1.255.",
+      "options": ["True", "False"],
+      "correctAnswer": 0,
+      "difficulty": "easy",
+      "explanation": "Standard Class C network broadcast address calculation."
+    },
+    {
+      "id": 37,
+      "chapter": 13,
+      "topic": "AAA Configuration",
+      "text": "The authentication, authorization and accounting schemes and HWTACACS or RADIUS server templates created on AR routers take effect only after being applied to a domain.",
+      "options": ["True", "False"],
+      "correctAnswer": 0,
+      "difficulty": "medium",
+      "explanation": "AAA schemes and server templates must be applied to domains to become effective for user authentication."
+    },
+    {
+      "id": 38,
+      "chapter": 16,
+      "topic": "AP Management",
+      "text": "The working mode of an AP cannot be changed.",
+      "options": ["True", "False"],
+      "correctAnswer": 1,
+      "difficulty": "easy",
+      "explanation": "AP working modes are configurable between Fat AP and Fit AP modes."
+    },
+    {
+      "id": 39,
+      "chapter": 8,
+      "topic": "VLAN Interfaces",
+      "text": "The IP addresses of VLANIF interfaces on the same switch must be different.",
+      "options": ["True", "False"],
+      "correctAnswer": 0,
+      "difficulty": "medium",
+      "explanation": "Each VLANIF represents a separate Layer 3 interface requiring unique IP addresses."
+    },
+    {
+      "id": 40,
+      "chapter": 6,
+      "topic": "OSPF States",
+      "text": "By the time two OSPF-enabled routers have established a 2-way neighbor relationship, LSDB synchronization has been completed.",
+      "options": ["True", "False"],
+      "correctAnswer": 1,
+      "difficulty": "hard",
+      "explanation": "2-way state only means bidirectional communication is established. LSDB synchronization occurs later in Exchange/Loading states."
+    },
+    {
+      "id": 41,
+      "chapter": 6,
+      "topic": "OSPF States",
+      "text": "By the time two OSPF-enabled routers have established a 2-way neighbor relationship, LSDB synchronization has been completed.",
+      "options": ["True", "False"],
+      "correctAnswer": 1,
+      "difficulty": "hard",
+      "explanation": "LSDB synchronization happens after 2-way state, during Exchange and Loading states."
+    },
+    {
+      "id": 42,
+      "chapter": 1,
+      "topic": "Gateway Configuration",
+      "text": "A gateway must be configured for communication between a host and other hosts.",
+      "options": ["True", "False"],
+      "correctAnswer": 1,
+      "difficulty": "easy",
+      "explanation": "Gateway is only needed for communication with hosts on different networks. Same-network communication uses ARP."
+    },
+    {
+      "id": 43,
+      "chapter": 1,
+      "topic": "Network Communication",
+      "text": "Making a call on a landline telephone is a type of network communication.",
+      "options": ["True", "False"],
+      "correctAnswer": 0,
+      "difficulty": "easy",
+      "explanation": "Telephone networks are indeed a form of communication network using circuit switching."
+    },
+    {
+      "id": 44,
+      "chapter": 11,
+      "topic": "Switch Stacking",
+      "text": "More than two switches can be stacked into one logical device.",
+      "options": ["True", "False"],
+      "correctAnswer": 0,
+      "difficulty": "medium",
+      "explanation": "Switch stacking technologies like iStack or CSS allow multiple physical switches to operate as a single logical device."
+    },
+    {
+      "id": 45,
+      "chapter": 15,
+      "topic": "Network Automation",
+      "text": "Telnet.read_very_eager() in telnetlib is used to read all data that can be read without blocking in I/O.",
+      "options": ["True", "False"],
+      "correctAnswer": 0,
+      "difficulty": "hard",
+      "explanation": "telnet.read_very_eager() reads all available data without blocking, typically used with time module for non-blocking I/O."
+    },
+    {
+      "id": 46,
+      "chapter": 7,
+      "topic": "MAC Address Table",
+      "text": "After a switch restarts, static MAC address entries saved on the switch remain in the MAC address table.",
+      "options": ["True", "False"],
+      "correctAnswer": 1,
+      "difficulty": "medium",
+      "explanation": "Static MAC entries are lost after reboot unless saved to configuration. Dynamic entries are always cleared on reboot."
+    },
+    {
+      "id": 47,
+      "chapter": 6,
+      "topic": "OSPF Configuration",
+      "text": "The router ID of the OSPF-enabled router must be the same as the IP address of an interface on the router.",
+      "options": ["True", "False"],
+      "correctAnswer": 1,
+      "difficulty": "medium",
+      "explanation": "OSPF Router ID doesn't have to match an interface IP. It can be any 32-bit value, typically using loopback IP for stability."
+    },
+    {
+      "id": 48,
+      "chapter": 17,
+      "topic": "PPPoE",
+      "text": "Only CHAP authentication can be used for PPPoE sessions.",
+      "options": ["True", "False"],
+      "correctAnswer": 1,
+      "difficulty": "medium",
+      "explanation": "PPPoE supports both PAP and CHAP authentication methods."
+    },
+    {
+      "id": 49,
+      "chapter": 16,
+      "topic": "WLAN Architecture",
+      "text": "Fat APs can provide wireless user access, wireless user authentication, and service data forwarding without an AC.",
+      "options": ["True", "False"],
+      "correctAnswer": 0,
+      "difficulty": "medium",
+      "explanation": "Fat APs operate independently and handle all WLAN functions locally without requiring an AC."
+    },
+    {
+      "id": 50,
+      "chapter": 16,
+      "topic": "WLAN Security",
+      "text": "Only the WPA2-PSK security policy supports TKIP data encryption.",
+      "options": ["True", "False"],
+      "correctAnswer": 1,
+      "difficulty": "hard",
+      "explanation": "WPA2 typically uses AES-CCMP encryption. TKIP is primarily associated with WPA, though WPA2 can support it for backward compatibility."
+    },
+    {
+      "id": 51,
+      "chapter": 9,
+      "topic": "STP Port Roles",
+      "text": "All ports on the root bridge switch are designated ports.",
+      "options": ["True", "False"],
+      "correctAnswer": 1,
+      "difficulty": "medium",
+      "explanation": "On the root bridge, all active ports become designated ports since the root bridge is the reference point for all paths."
+    },
+    {
+      "id": 52,
+      "chapter": 6,
+      "topic": "OSPF DR/BDR",
+      "text": "OSPF selects one DR and multiple BDRs to ensure backup.",
+      "options": ["True", "False"],
+      "correctAnswer": 1,
+      "difficulty": "medium",
+      "explanation": "OSPF elects exactly one DR and one BDR per multi-access network segment."
+    },
+    {
+      "id": 53,
+      "chapter": 19,
+      "topic": "IPv6 Headers",
+      "text": "The basic header of IPv6 packets has a fixed length.",
+      "options": ["True", "False"],
+      "correctAnswer": 0,
+      "difficulty": "medium",
+      "explanation": "IPv6 basic header is fixed at 40 bytes, unlike IPv4 which has variable header length."
+    },
+    {
+      "id": 54,
+      "chapter": 4,
+      "topic": "IP Routing",
+      "text": "When forwarding a data packet, a router needs to change the destination IP address of the packet.",
+      "options": ["True", "False"],
+      "correctAnswer": 1,
+      "difficulty": "medium",
+      "explanation": "Routers change source/destination MAC addresses, not IP addresses, during normal forwarding. IP changes only in NAT."
+    },
+    {
+      "id": 55,
+      "chapter": 16,
+      "topic": "WLAN Standards",
+      "text": "IEEE 802.11ac supports only the 5 GHz frequency band.",
+      "options": ["True", "False"],
+      "correctAnswer": 0,
+      "difficulty": "medium",
+      "explanation": "802.11ac operates exclusively in the 5 GHz band for its higher performance features."
+    },
+    {
+      "id": 56,
+      "chapter": 8,
+      "topic": "VLAN Configuration",
+      "text": "On Huawei switches, you can run the VLAN batch command to create multiple VLANs in batches.",
+      "options": ["True", "False"],
+      "correctAnswer": 0,
+      "difficulty": "easy",
+      "explanation": "vlan batch command allows creating multiple VLANs simultaneously, improving configuration efficiency."
+    },
+    {
+      "id": 57,
+      "chapter": 8,
+      "topic": "VLAN Range",
+      "text": "A trunk interface allows frames from multiple VLANs including VLAN 4096.",
+      "options": ["True", "False"],
+      "correctAnswer": 1,
+      "difficulty": "medium",
+      "explanation": "VLAN range is 1-4094. VLAN 4096 is beyond the valid range and cannot be used."
+    },
+    {
+      "id": 58,
+      "chapter": 16,
+      "topic": "WLAN Channels",
+      "text": "None of the 14 available channels on the 2.4 GHz frequency band overlap.",
+      "options": ["True", "False"],
+      "correctAnswer": 1,
+      "difficulty": "hard",
+      "explanation": "2.4GHz channels do overlap. Only channels 1, 6, and 11 are non-overlapping in most regions."
+    },
+    {
+      "id": 59,
+      "chapter": 4,
+      "topic": "IP Communication",
+      "text": "Host A (10.0.12.1/30) and Host B (10.0.125/24) cannot communicate with each other.",
+      "options": ["True", "False"],
+      "correctAnswer": 0,
+      "difficulty": "hard",
+      "explanation": "Hosts are on different subnets (10.0.12.0/30 vs 10.0.125.0/24) and cannot communicate directly without a router."
+    },
+    {
+      "id": 60,
+      "chapter": 16,
+      "topic": "WLAN Standards",
+      "text": "Wi-Fi 6 is also known as the IEEE 802.11ax standard.",
+      "options": ["True", "False"],
+      "correctAnswer": 0,
+      "difficulty": "easy",
+      "explanation": "Wi-Fi 6 is the marketing name for IEEE 802.11ax standard."
+    },
+    {
+      "id": 61,
+      "chapter": 19,
+      "topic": "IPv6 Addressing",
+      "text": "When a host uses the stateless address autoconfiguration solution to obtain an IPv6 address, the host cannot obtain the DNS server address.",
+      "options": ["True", "False"],
+      "correctAnswer": 0,
+      "difficulty": "medium",
+      "explanation": "Stateless address autoconfiguration (SLAAC) provides IP address but not DNS information. DNS typically requires DHCPv6 or manual configuration."
+    },
+    {
+      "id": 62,
+      "chapter": 13,
+      "topic": "AAA",
+      "text": "If AAA authentication is used on Huawei devices and the remote server does not respond, the authentication can be performed on network devices.",
+      "options": ["True", "False"],
+      "correctAnswer": 0,
+      "difficulty": "medium",
+      "explanation": "AAA can be configured with backup authentication methods, allowing local authentication if remote servers are unavailable."
+    },
+    {
+      "id": 63,
+      "chapter": 15,
+      "topic": "SNMP",
+      "text": "With SNMP, an NMS can only display the device running status but cannot deliver configurations.",
+      "options": ["True", "False"],
+      "correctAnswer": 1,
+      "difficulty": "medium",
+      "explanation": "SNMP allows both monitoring (GET) and configuration (SET) operations, enabling NMS to deliver configurations to devices."
+    },
+    {
+      "id": 64,
+      "chapter": 17,
+      "topic": "PPPoE",
+      "text": "Only CHAP authentication can be used for PPPoE sessions.",
+      "options": ["True", "False"],
+      "correctAnswer": 1,
+      "difficulty": "medium",
+      "explanation": "PPPoE supports both PAP and CHAP authentication methods."
+    },
+    {
+      "id": 65,
+      "chapter": 1,
+      "topic": "Gateway Configuration",
+      "text": "A gateway must be configured for communication between a host and other hosts.",
+      "options": ["True", "False"],
+      "correctAnswer": 1,
+      "difficulty": "easy",
+      "explanation": "Gateway is only required for inter-network communication, not for same-network communication."
+    },
+    {
+      "id": 66,
+      "chapter": 11,
+      "topic": "Eth-Trunk",
+      "text": "An Eth-Trunk interface can be used only as a Layer 2 interface.",
+      "options": ["True", "False"],
+      "correctAnswer": 1,
+      "difficulty": "medium",
+      "explanation": "Eth-Trunk interfaces can be configured as either Layer 2 or Layer 3 interfaces depending on requirements."
+    },
+    {
+      "id": 67,
+      "chapter": 16,
+      "topic": "CAPWAP Protocol",
+      "text": "CAPWAP control tunnels and data tunnels use the same port number.",
+      "options": ["True", "False"],
+      "correctAnswer": 1,
+      "difficulty": "hard",
+      "explanation": "CAPWAP uses different ports: control (5246) and data (5247)."
+    },
+    {
+      "id": 68,
+      "chapter": 8,
+      "topic": "VLAN Configuration",
+      "text": "On Huawei switches, you can run the VLAN batch command to create multiple VLANs in batches.",
+      "options": ["True", "False"],
+      "correctAnswer": 0,
+      "difficulty": "easy",
+      "explanation": "vlan batch command enables efficient batch creation of VLANs."
+    },
+    {
+      "id": 69,
+      "chapter": 3,
+      "topic": "Network Diagnostics",
+      "text": "The tracert diagnostic tool of Huawei routers is used to trace data forwarding paths.",
+      "options": ["True", "False"],
+      "correctAnswer": 0,
+      "difficulty": "easy",
+      "explanation": "tracert (traceroute) identifies the path packets take to reach a destination and measures transit delays."
+    },
+    {
+      "id": 70,
+      "chapter": 8,
+      "topic": "VLAN Interfaces",
+      "text": "The IP addresses of VLANIF interfaces on the same switch must be different.",
+      "options": ["True", "False"],
+      "correctAnswer": 0,
+      "difficulty": "medium",
+      "explanation": "Each VLANIF interface requires a unique IP address as they represent separate Layer 3 interfaces."
+    },
+    {
+      "id": 71,
+      "chapter": 3,
+      "topic": "VRP Configuration",
+      "text": "For the Versatile Routing Platform (VRP), the login timeout period can be set only on a VTY interface.",
+      "options": ["True", "False"],
+      "correctAnswer": 1,
+      "difficulty": "medium",
+      "explanation": "Login timeout can be configured on various interface types including console, VTY, and others."
+    },
+    {
+      "id": 72,
+      "chapter": 5,
+      "topic": "Static Routing",
+      "text": "The priority of static routes cannot be manually specified.",
+      "options": ["True", "False"],
+      "correctAnswer": 1,
+      "difficulty": "medium",
+      "explanation": "Static route priority (administrative distance) can be manually configured to influence route selection."
+    },
+    {
+      "id": 73,
+      "chapter": 9,
+      "topic": "STP",
+      "text": "For STP, the default root path cost of the root bridge is 0.",
+      "options": ["True", "False"],
+      "correctAnswer": 0,
+      "difficulty": "medium",
+      "explanation": "Root bridge has root path cost of 0 as it's the reference point in STP topology."
+    },
+    {
+      "id": 74,
+      "chapter": 6,
+      "topic": "OSPF Packets",
+      "text": "Which of the following packets is used by OSPF to discover and maintain neighbor relationships?",
+      "options": ["HELLO", "LSR", "LSU", "DD"],
+      "correctAnswer": 0,
+      "difficulty": "medium",
+      "explanation": "OSPF HELLO packets are used for neighbor discovery and maintaining adjacency relationships."
+    },
+    {
+      "id": 75,
+      "chapter": 7,
+      "topic": "Switch Forwarding",
+      "text": "A switch receives a unicast data frame with a VLAN tag, but cannot find the destination MAC address in its MAC address table. What action will the switch take?",
+      "options": [
+        "Broadcast on all interfaces",
+        "Broadcast on all interfaces in the same VLAN",
+        "Broadcast on all access interfaces",
+        "Discard the frame"
+      ],
+      "correctAnswer": 1,
+      "difficulty": "medium",
+      "explanation": "When destination MAC is unknown, the switch floods the frame to all ports in the same VLAN (except the receiving port)."
+    },
+    {
+      "id": 76,
+      "chapter": 3,
+      "topic": "VRP CLI",
+      "text": "Which error message is displayed when an entered command is incomplete on VRP?",
+      "options": [
+        "Error: Incomplete command found at '^' position",
+        "Error: Too many parameters found at '^' position",
+        "Error: Ambiguous command found at '^' position",
+        "Error: Wrong parameter found at '^' position"
+      ],
+      "correctAnswer": 0,
+      "difficulty": "easy",
+      "explanation": "'Error: Incomplete command found at ^ position' indicates the command syntax is incomplete."
+    },
+    {
+      "id": 77,
+      "chapter": 4,
+      "topic": "IP Protocol",
+      "text": "Which description regarding the TTL field of the IP packet is correct?",
+      "options": [
+        "TTL defines how many packets the source can send",
+        "TTL defines the duration during which the source can send packets",
+        "TTL value decrements by 1 each time the packet is routed",
+        "TTL value increments by 1 each time the packet is routed"
+      ],
+      "correctAnswer": 2,
+      "difficulty": "medium",
+      "explanation": "TTL (Time to Live) decreases by 1 at each router hop to prevent infinite looping."
+    },
+    {
+      "id": 78,
+      "chapter": 15,
+      "topic": "FTP Protocol",
+      "text": "How many TCP connections will be established when FTP is used to transfer files?",
+      "options": ["1", "2", "3", "4"],
+      "correctAnswer": 1,
+      "difficulty": "medium",
+      "explanation": "FTP uses two TCP connections: control connection (port 21) for commands and data connection (port 20) for file transfer."
+    },
+    {
+      "id": 79,
+      "chapter": 3,
+      "topic": "VRP Privilege",
+      "text": "What is the result of the command 'command-privilege level 3 view user save'?",
+      "options": [
+        "Adjusts save command privilege level to 3",
+        "Adjusts save command in user view to privilege level 3",
+        "Adjusts user view command privilege level to 3 and saves configuration",
+        "Adjusts privilege level of a user to 3 and saves configuration"
+      ],
+      "correctAnswer": 1,
+      "difficulty": "hard",
+      "explanation": "This command adjusts the privilege level of the 'save' command in user view to level 3."
+    },
+    {
+      "id": 80,
+      "chapter": 8,
+      "topic": "VLAN Configuration",
+      "text": "What is the PVID of a hybrid interface configured with 'port hybrid tagged vlan 2 to 3 100' and 'port hybrid untagged vlan 4 6'?",
+      "options": ["1", "2", "4", "100"],
+      "correctAnswer": 0,
+      "difficulty": "hard",
+      "explanation": "When PVID is not explicitly configured, it defaults to VLAN 1."
+    },
+    {
+      "id": 81,
+      "chapter": 11,
+      "topic": "LACP",
+      "text": "In LACP mode link aggregation with max active ports set to 3, which port will not be active?",
+      "options": ["Port with highest priority", "Port with lowest priority", "Port with highest MAC", "Port with lowest MAC"],
+      "correctAnswer": 1,
+      "difficulty": "hard",
+      "explanation": "LACP selects active ports based on priority, with lower priority values being preferred. Ports with lowest priority become inactive when maximum active ports limit is reached."
+    },
+    {
+      "id": 82,
+      "chapter": 8,
+      "topic": "VLAN Configuration",
+      "text": "To ensure Host A and Host B in VLAN 2 can communicate through multiple switches, what configuration is needed?",
+      "options": [
+        "Create VLAN 2 on intermediate switch",
+        "Configure trunk interfaces allowing VLAN 2 on intermediate switch",
+        "Configure access interfaces on intermediate switch",
+        "Create VLAN 2 and configure trunk interfaces allowing VLAN 2 on intermediate switch"
+      ],
+      "correctAnswer": 3,
+      "difficulty": "medium",
+      "explanation": "The intermediate switch needs VLAN 2 created and trunk interfaces configured to allow VLAN 2 traffic to pass through."
+    },
+    {
+      "id": 83,
+      "chapter": 16,
+      "topic": "WLAN Standards",
+      "text": "Which IEEE 802.11 standard does not support the 5 GHz frequency band?",
+      "options": ["802.11n", "802.11ac Wave 1", "802.11ac Wave 2", "802.11g"],
+      "correctAnswer": 3,
+      "difficulty": "medium",
+      "explanation": "802.11g operates only in the 2.4 GHz band, while 802.11n and 802.11ac support 5 GHz."
+    },
+    {
+      "id": 84,
+      "chapter": 3,
+      "topic": "Interface Status",
+      "text": "An interface shows 'Administrative DOWN' and 'Line protocol DOWN'. What is the most likely cause?",
+      "options": [
+        "Incorrect cable connected",
+        "No IP address configured",
+        "No dynamic routing protocol enabled",
+        "Interface manually shut down by administrator"
+      ],
+      "correctAnswer": 3,
+      "difficulty": "easy",
+      "explanation": "'Administrative DOWN' indicates the interface has been manually shut down using the 'shutdown' command."
+    },
+    {
+      "id": 85,
+      "chapter": 6,
+      "topic": "OSPF Reliability",
+      "text": "Which OSPF packet can ensure LSA update reliability?",
+      "options": ["LSR", "LSU", "LSACK", "DD"],
+      "correctAnswer": 2,
+      "difficulty": "hard",
+      "explanation": "LSACK (Link State Acknowledgment) packets provide reliable flooding of LSAs by acknowledging receipt of LSU packets."
+    },
+    {
+      "id": 86,
+      "chapter": 15,
+      "topic": "DHCP Configuration",
+      "text": "With multiple DHCP pools configured, which pool will be used when dhcp select global is configured on an interface?",
+      "options": [
+        "Pool matching interface network",
+        "First pool in configuration",
+        "Last pool in configuration",
+        "Random pool selection"
+      ],
+      "correctAnswer": 0,
+      "difficulty": "hard",
+      "explanation": "DHCP global selection uses the pool whose network matches the interface's IP network."
+    },
+    {
+      "id": 87,
+      "chapter": 14,
+      "topic": "NAT Limitations",
+      "text": "With only two public IPs in NAT pool and three hosts needing Internet access, what happens to the third host?",
+      "options": [
+        "Gets dynamic IP from interface",
+        "Uses port-based NAT",
+        "Cannot access Internet",
+        "Uses public IPs in rotation"
+      ],
+      "correctAnswer": 2,
+      "difficulty": "medium",
+      "explanation": "Without NAPT (port address translation), only two hosts can be translated simultaneously with two public IPs. The third host cannot access Internet."
+    },
+    {
+      "id": 88,
+      "chapter": 9,
+      "topic": "STP Timers",
+      "text": "Which STP timer value is incorrect in the display output showing Hello 2s, MaxAge 20s, FwDly 15s?",
+      "options": ["Hello timer", "MaxAge timer", "Forward Delay timer", "All are correct"],
+      "correctAnswer": 2,
+      "difficulty": "hard",
+      "explanation": "Standard STP Forward Delay timer is 15 seconds, not 20 seconds as indicated in the question."
+    },
+    {
+      "id": 89,
+      "chapter": 7,
+      "topic": "MAC Address Table",
+      "text": "Which information is not included in the MAC address table of a switch?",
+      "options": ["MAC address", "Port number", "IP address", "VLAN ID"],
+      "correctAnswer": 2,
+      "difficulty": "easy",
+      "explanation": "MAC address tables contain MAC addresses, port numbers, and VLAN IDs, but not IP addresses."
+    },
+    {
+      "id": 90,
+      "chapter": 8,
+      "topic": "VLAN Priority",
+      "text": "What is the value range of the Priority field in a VLAN tag?",
+      "options": ["0 to 3", "0 to 7", "0 to 15", "0 to 63"],
+      "correctAnswer": 1,
+      "difficulty": "medium",
+      "explanation": "The 3-bit Priority Code Point (PCP) field in VLAN tags has values from 0 to 7."
+    },
+    {
+      "id": 91,
+      "chapter": 7,
+      "topic": "Switch Forwarding",
+      "text": "With empty MAC table, how does a switch handle a frame with unknown destination MAC?",
+      "options": [
+        "Discards the frame",
+        "Forwards to specific port",
+        "Forwards to multiple ports",
+        "Floods to all ports except receiving port"
+      ],
+      "correctAnswer": 3,
+      "difficulty": "easy",
+      "explanation": "Switches flood frames with unknown destination MAC addresses to all ports except the receiving port."
+    },
+    {
+      "id": 92,
+      "chapter": 9,
+      "topic": "STP Election",
+      "text": "Which parameter is used to elect the root bridge in STP?",
+      "options": ["Bridge ID", "Port ID", "Root path cost", "System name"],
+      "correctAnswer": 0,
+      "difficulty": "medium",
+      "explanation": "Root bridge election is based on Bridge ID, which consists of bridge priority and MAC address."
+    },
+    {
+      "id": 93,
+      "chapter": 16,
+      "topic": "AC Functions",
+      "text": "Which function is not supported by the AC in AC + Fit AP architecture?",
+      "options": [
+        "User access control",
+        "AP configuration delivery",
+        "User access authentication",
+        "User data packet forwarding regardless of data forwarding mode"
+      ],
+      "correctAnswer": 3,
+      "difficulty": "medium",
+      "explanation": "In direct forwarding mode, user data packets are forwarded directly by APs without going through AC."
+    },
+    {
+      "id": 94,
+      "chapter": 3,
+      "topic": "VRP Platform",
+      "text": "What is the full name of VRP?",
+      "options": [
+        "Versatile Routing Platform",
+        "Virtual Routing Platform",
+        "Versatile Routing Protocol",
+        "Versatile Redundancy Platform"
+      ],
+      "correctAnswer": 0,
+      "difficulty": "easy",
+      "explanation": "VRP stands for Versatile Routing Platform, Huawei's network operating system."
+    },
+    {
+      "id": 95,
+      "chapter": 6,
+      "topic": "OSPF Areas",
+      "text": "Which statement is true about the OSPF backbone area?",
+      "options": [
+        "All areas can act as backbone area",
+        "Area 0 is the backbone area",
+        "All routers in backbone area are ABRs",
+        "Backbone area must be deployed with more than two routers"
+      ],
+      "correctAnswer": 1,
+      "difficulty": "medium",
+      "explanation": "Area 0 is always the backbone area in OSPF, and all other areas must connect to it."
+    },
+    {
+      "id": 96,
+      "chapter": 10,
+      "topic": "Inter-VLAN Routing",
+      "text": "What is an advantage of one-arm routing for inter-VLAN communication?",
+      "options": [
+        "Reduces number of links",
+        "Reduces use of IP addresses",
+        "Reduces number of devices",
+        "Reduces routing table entries"
+      ],
+      "correctAnswer": 1,
+      "difficulty": "medium",
+      "explanation": "One-arm routing (router-on-a-stick) uses subinterfaces on a single physical interface, reducing IP address consumption compared to using multiple physical interfaces."
+    },
+    {
+      "id": 97,
+      "chapter": 8,
+      "topic": "VLAN Configuration",
+      "text": "What does 'port trunk allow-pass vlan all' command do?",
+      "options": [
+        "Allows all VLAN IDs to pass through",
+        "Requires same command on peer port",
+        "Allows dynamic VLAN determination",
+        "Blocks default VLAN 3"
+      ],
+      "correctAnswer": 0,
+      "difficulty": "easy",
+      "explanation": "This command allows all VLANs (1-4094) to pass through the trunk interface."
+    },
+    {
+      "id": 98,
+      "chapter": 16,
+      "topic": "Wi-Fi 6",
+      "text": "Which is not an advantage of Wi-Fi 6 over Wi-Fi 5?",
+      "options": [
+        "Higher power consumption",
+        "Higher bandwidth",
+        "More STAs per AP",
+        "Lower transmission latency"
+      ],
+      "correctAnswer": 0,
+      "difficulty": "medium",
+      "explanation": "Wi-Fi 6 (802.11ax) actually has lower power consumption due to Target Wake Time feature, not higher."
+    },
+    {
+      "id": 99,
+      "chapter": 19,
+      "topic": "IPv6 Addressing",
+      "text": "What is the EUI-64 address for MAC address 00E0-FCEF-0FEC?",
+      "options": [
+        "02E0-FCFF-FEEF-0FEC",
+        "02E0-FCEF-FFFF-0FEC",
+        "00E0-FCEF-FEFF-0FEC",
+        "00E0-FCEF-FFFF-0FEC"
+      ],
+      "correctAnswer": 0,
+      "difficulty": "hard",
+      "explanation": "EUI-64 inserts FFFE in the middle and sets the 7th bit (universal/local bit) to 1, changing 00 to 02."
+    },
+    {
+      "id": 100,
+      "chapter": 9,
+      "topic": "STP Election",
+      "text": "Which statement is true about root bridge election in STP?",
+      "options": [
+        "Largest MAC becomes root if priorities equal",
+        "Largest bridge priority becomes root",
+        "Smallest bridge priority becomes root",
+        "Largest number of ports becomes root if priorities equal"
+      ],
+      "correctAnswer": 2,
+      "difficulty": "medium",
+      "explanation": "The switch with the smallest bridge priority becomes root bridge. If priorities are equal, the switch with smallest MAC address becomes root."
+    },
+    {
+      "id": 101,
+      "chapter": 9,
+      "topic": "STP Election",
+      "text": "Which bridge ID will be selected as root bridge?",
+      "options": [
+        "32768 00-01-02-03-04-CC",
+        "4096 00-01-02-03-04-DD",
+        "32768 00-01-02-03-04-AA",
+        "32768 00-01-02-03-04-8B"
+      ],
+      "correctAnswer": 1,
+      "difficulty": "hard",
+      "explanation": "Bridge with priority 4096 (lowest) becomes root. Lower priority values are preferred in STP election."
+    },
+    {
+      "id": 102,
+      "chapter": 6,
+      "topic": "OSPF States",
+      "text": "In which state does OSPF determine the master/slave relationship of DD packets?",
+      "options": ["ExStart", "Exchange", "Full", "2-way"],
+      "correctAnswer": 0,
+      "difficulty": "hard",
+      "explanation": "ExStart state establishes master/slave relationship for Database Description packet exchange."
+    },
+    {
+      "id": 103,
+      "chapter": 5,
+      "topic": "Routing Table",
+      "text": "Which information is not included in the routing table?",
+      "options": ["Destination/Mask", "Cost", "Next-hop", "MAC address"],
+      "correctAnswer": 3,
+      "difficulty": "easy",
+      "explanation": "Routing tables contain destination network, protocol, preference, cost, next-hop, and interface - but not MAC addresses."
+    },
+    {
+      "id": 104,
+      "chapter": 3,
+      "topic": "Router Initialization",
+      "text": "If configuration file doesn't exist in default directory, what does router use for initialization?",
+      "options": [
+        "New configuration file",
+        "Initial configuration file",
+        "Default parameters",
+        "Current configuration file"
+      ],
+      "correctAnswer": 2,
+      "difficulty": "medium",
+      "explanation": "Without a saved configuration, routers initialize with factory default parameters."
+    },
+    {
+      "id": 105,
+      "chapter": 16,
+      "topic": "WLAN Terminology",
+      "text": "What is a terminal in compliance with 802.11 standards called?",
+      "options": ["AP", "STA", "AC", "Client"],
+      "correctAnswer": 1,
+      "difficulty": "easy",
+      "explanation": "STA (Station) refers to any device that contains IEEE 802.11 conformant MAC and PHY interface to the wireless medium."
+    },
+    {
+      "id": 106,
+      "chapter": 4,
+      "topic": "IP Addressing",
+      "text": "Which IPv4 address cannot be assigned to a host to access the Internet?",
+      "options": ["100.1.1.1", "200.1.1.1", "10.1.1.1", "50.1.1.4"],
+      "correctAnswer": 2,
+      "difficulty": "easy",
+      "explanation": "10.1.1.1 is a private IP address (RFC 1918) and cannot be used directly on the Internet without NAT."
+    },
+    {
+      "id": 107,
+      "chapter": 8,
+      "topic": "VLAN Configuration",
+      "text": "How many VLANs are created using 'vlan batch 10 20' and 'vlan batch 10 to 20'?",
+      "options": ["11 and 1", "2 and 11", "11 and 2", "1 and 11"],
+      "correctAnswer": 1,
+      "difficulty": "medium",
+      "explanation": "'vlan batch 10 20' creates 2 VLANs (10 and 20), 'vlan batch 10 to 20' creates 11 VLANs (10 through 20)."
+    },
+    {
+      "id": 108,
+      "chapter": 9,
+      "topic": "STP Port Roles",
+      "text": "What is the port role that doesn't forward packets but receives BPDUs to monitor network changes?",
+      "options": ["Root port", "Designated port", "Alternate port", "Disabled port"],
+      "correctAnswer": 2,
+      "difficulty": "hard",
+      "explanation": "Alternate ports are backup ports for root ports that receive BPDUs but don't forward data frames."
+    },
+    {
+      "id": 109,
+      "chapter": 1,
+      "topic": "OSI Model",
+      "text": "What are the components of the OSI reference model from top to bottom?",
+      "options": [
+        "Application, presentation, session, transport, network, data link, physical",
+        "Application, transport, network, link, physical",
+        "Application, session, presentation, transport, network, data link, physical",
+        "Application, presentation, session, network, transport, data link, physical"
+      ],
+      "correctAnswer": 0,
+      "difficulty": "easy",
+      "explanation": "OSI model layers: Application, Presentation, Session, Transport, Network, Data Link, Physical."
+    },
+    {
+      "id": 110,
+      "chapter": 12,
+      "topic": "ACL Application",
+      "text": "Which device cannot use SNMP service based on ACL rules permitting 192.168.1.2 and 192.168.1.3, denying 192.168.1.4?",
+      "options": [
+        "192.168.1.2",
+        "192.168.1.3",
+        "192.168.1.4",
+        "192.168.1.5"
+      ],
+      "correctAnswer": 2,
+      "difficulty": "medium",
+      "explanation": "ACL has explicit deny for 192.168.1.4, so this device cannot use SNMP service."
+    },
+    {
+      "id": 111,
+      "chapter": 1,
+      "topic": "Router Functions",
+      "text": "Which statement about routers is false?",
+      "options": [
+        "Works at network layer",
+        "Cannot isolate broadcast domains",
+        "Can forward IP packets",
+        "Can function as gateway"
+      ],
+      "correctAnswer": 1,
+      "difficulty": "medium",
+      "explanation": "Routers DO isolate broadcast domains - each router interface creates a separate broadcast domain."
+    },
+    {
+      "id": 112,
+      "chapter": 6,
+      "topic": "OSPF BDR Election",
+      "text": "With priorities 255, 0, and 0 on three routers, which becomes BDR?",
+      "options": ["Router A", "Router B", "Router C", "No BDR"],
+      "correctAnswer": 3,
+      "difficulty": "hard",
+      "explanation": "Routers with priority 0 cannot become DR or BDR. With only one router eligible (priority 255), no BDR is elected."
+    },
+    {
+      "id": 113,
+      "chapter": 14,
+      "topic": "NAT Server",
+      "text": "Which NAT Server configuration is correct for a web server in private network?",
+      "options": [
+        "nat server protocol tcp global 202.10.10.1 www inside 192.168.1.1 8080",
+        "nat server protocol tcp global 192.168.1.1 www inside 202.10.10.1 8080",
+        "nat server protocol tcp global 202.10.10.1 www inside 192.168.1.1 8080 on GE0/0/1",
+        "nat server protocol tcp global 192.168.1.1 www inside 202.10.10.1 8080 on GE0/0/1"
+      ],
+      "correctAnswer": 0,
+      "difficulty": "hard",
+      "explanation": "Correct syntax: nat server protocol tcp global <public-ip> <public-port> inside <private-ip> <private-port>"
+    },
+    {
+      "id": 114,
+      "chapter": 12,
+      "topic": "Time-based ACL",
+      "text": "Which ACL rule blocks Internet access during 8:00-17:00 daily?",
+      "options": [
+        "time-range am9topm5 08:00 to 17:00 daily + rule deny time-range am9topm5",
+        "time-range am9topm5 08:00 to 17:00 working-day + rule deny",
+        "time-range am9topm5 08:00 to 17:00 off-day + rule permit time-range am9topm5",
+        "time-range am9topm5 08:00 to 17:00 daily + rule permit"
+      ],
+      "correctAnswer": 0,
+      "difficulty": "hard",
+      "explanation": "Correct configuration requires time-range defined as daily 08:00-17:00 and ACL rule denying traffic during that time-range."
+    },
+    {
+      "id": 115,
+      "chapter": 17,
+      "topic": "PPP LCP",
+      "text": "Which parameter is used to detect link loops in LCP negotiation?",
+      "options": ["MRU", "Magic Number", "PAP", "CHAP"],
+      "correctAnswer": 1,
+      "difficulty": "hard",
+      "explanation": "Magic Number in LCP negotiation helps detect looped-back links and other data link layer anomalies."
+    },
+    {
+      "id": 116,
+      "chapter": 15,
+      "topic": "Firewall Functions",
+      "text": "Which statement about firewalls is false?",
+      "options": [
+        "Can separate networks at different security levels",
+        "Can authenticate user identity",
+        "Cannot translate network addresses",
+        "Can implement access control between networks"
+      ],
+      "correctAnswer": 2,
+      "difficulty": "medium",
+      "explanation": "Many modern firewalls include NAT functionality and can perform network address translation."
+    },
+    {
+      "id": 117,
+      "chapter": 15,
+      "topic": "ACL Application",
+      "text": "Which device can use Telnet service based on ACL denying 172.16.105.3, 172.16.105.1, 172.16.105.5?",
+      "options": [
+        "172.16.105.3",
+        "172.16.105.4",
+        "172.16.105.5",
+        "172.16.105.6"
+      ],
+      "correctAnswer": 3,
+      "difficulty": "medium",
+      "explanation": "ACL implicitly denies all not explicitly permitted. Only 172.16.105.6 is not explicitly denied, so it can use Telnet."
+    },
+    {
+      "id": 118,
+      "chapter": 15,
+      "topic": "FTP Protocol",
+      "text": "How many TCP connections will be established when FTP is used to transfer files?",
+      "options": ["1", "2", "3", "4"],
+      "correctAnswer": 1,
+      "difficulty": "medium",
+      "explanation": "FTP uses two TCP connections: control (port 21) and data (port 20)."
+    },
+    {
+      "id": 119,
+      "chapter": 11,
+      "topic": "LACPDU",
+      "text": "Which information is not carried in LACPDUs?",
+      "options": ["Device priority", "MAC address", "Interface priority", "Interface destination"],
+      "correctAnswer": 3,
+      "difficulty": "hard",
+      "explanation": "LACPDUs contain system/device info, port info, and aggregation info, but not interface destination."
+    },
+    {
+      "id": 120,
+      "chapter": 13,
+      "topic": "AAA Authentication",
+      "text": "Which authentication mode does not require a username and password?",
+      "options": [
+        "authentication-mode hwtacacs",
+        "authentication-mode local",
+        "authentication-mode none",
+        "authorization-mode hwtacacs"
+      ],
+      "correctAnswer": 2,
+      "difficulty": "easy",
+      "explanation": "authentication-mode none allows access without authentication credentials."
+    },
+    {
+      "id": 121,
+      "chapter": 9,
+      "topic": "STP Port States",
+      "text": "What is true about an STP-enabled port in Forwarding state?",
+      "options": [
+        "Forwards user traffic and processes BPDUs",
+        "Only receives and processes BPDUs",
+        "Does not process BPDUs or forward traffic",
+        "Creates MAC entries but doesn't forward traffic"
+      ],
+      "correctAnswer": 0,
+      "difficulty": "medium",
+      "explanation": "Forwarding state ports both forward user data frames and send/receive BPDUs."
+    },
+    {
+      "id": 122,
+      "chapter": 3,
+      "topic": "VRP Navigation",
+      "text": "Which command switches from system view to user view?",
+      "options": ["system-view", "router", "quit", "user-view"],
+      "correctAnswer": 2,
+      "difficulty": "easy",
+      "explanation": "The 'quit' command returns to the previous view level, from system view to user view."
+    },
+    {
+      "id": 123,
+      "chapter": 6,
+      "topic": "OSPF Packets",
+      "text": "Which packet is used by OSPF to discover and maintain neighbor relationships?",
+      "options": ["HELLO", "LSR", "LSU", "DD"],
+      "correctAnswer": 0,
+      "difficulty": "medium",
+      "explanation": "OSPF HELLO packets are used for neighbor discovery and keepalive functions."
+    },
+    {
+      "id": 124,
+      "chapter": 5,
+      "topic": "Route Preference",
+      "text": "Which route type has the highest priority?",
+      "options": ["Static route", "Direct route", "OSPF", "RIP"],
+      "correctAnswer": 1,
+      "difficulty": "medium",
+      "explanation": "Direct routes have the highest preference (0), followed by static routes (60), then dynamic routing protocols."
+    },
+    {
+      "id": 125,
+      "chapter": 5,
+      "topic": "Static Routing",
+      "text": "What is the default preference of static routes on Huawei routers?",
+      "options": ["0", "60", "100", "120"],
+      "correctAnswer": 1,
+      "difficulty": "medium",
+      "explanation": "Static routes have a default preference of 60 on Huawei devices."
+    },
+    {
+      "id": 126,
+      "chapter": 6,
+      "topic": "OSPF BDR Election",
+      "text": "With priorities 255, 0, and 0 on three routers, which becomes BDR?",
+      "options": ["Router A", "Router B", "Router C", "No BDR"],
+      "correctAnswer": 3,
+      "difficulty": "hard",
+      "explanation": "Routers with priority 0 cannot become DR or BDR, so no BDR is elected."
+    },
+    {
+      "id": 127,
+      "chapter": 6,
+      "topic": "OSPF Router ID",
+      "text": "Which IP address will be used as OSPF Router ID if no router ID is configured?",
+      "options": [
+        "10.0.12.1 (interface)",
+        "10.0.21.1 (interface)",
+        "10.0.1.1 (loopback0)",
+        "10.0.1.2 (loopback1)"
+      ],
+      "correctAnswer": 2,
+      "difficulty": "medium",
+      "explanation": "OSPF selects the highest loopback IP address as Router ID. If no loopback, highest physical interface IP."
+    },
+    {
+      "id": 128,
+      "chapter": 21,
+      "topic": "Python Automation",
+      "text": "Which method can read all data without blocking in telnetlib?",
+      "options": [
+        "telnet.read_all()",
+        "telnet.read_very_eager()",
+        "telnet.read_eager()",
+        "telnet.read_very_lazy()"
+      ],
+      "correctAnswer": 1,
+      "difficulty": "hard",
+      "explanation": "read_very_eager() reads everything available without blocking I/O."
+    },
+    {
+      "id": 129,
+      "chapter": 14,
+      "topic": "NAPT",
+      "text": "Which statement about port numbers in NAPT is true?",
+      "options": [
+        "Port mappings must be manually configured",
+        "Only port number range needs configuration",
+        "No port number configuration needed",
+        "ACL required to allocate port numbers"
+      ],
+      "correctAnswer": 2,
+      "difficulty": "medium",
+      "explanation": "NAPT automatically uses ephemeral ports for translation, no manual port configuration needed."
+    },
+    {
+      "id": 130,
+      "chapter": 15,
+      "topic": "FTP Protocol",
+      "text": "Which port is used by FTP control plane?",
+      "options": ["21", "22", "23", "24"],
+      "correctAnswer": 0,
+      "difficulty": "easy",
+      "explanation": "FTP control connection uses TCP port 21."
+    },
+    {
+      "id": 131,
+      "chapter": 15,
+      "topic": "DHCP Options",
+      "text": "Which DHCP option allows Fit APs to obtain AC IP address for CAPWAP tunnels?",
+      "options": ["Option 55", "Option 43", "Option 82", "Option 10"],
+      "correctAnswer": 1,
+      "difficulty": "hard",
+      "explanation": "DHCP Option 43 is used to provide AC IP addresses to Fit APs for CAPWAP tunnel establishment."
+    },
+    {
+      "id": 132,
+      "chapter": 9,
+      "topic": "STP Timers",
+      "text": "Which STP timer value is incorrect in display output?",
+      "options": [
+        "Hello timer (2s)",
+        "MaxAge timer (20s)",
+        "Forward Delay timer (20s)",
+        "All are correct"
+      ],
+      "correctAnswer": 2,
+      "difficulty": "hard",
+      "explanation": "Standard Forward Delay timer is 15 seconds, not 20 seconds."
+    },
+    {
+      "id": 133,
+      "chapter": 2,
+      "topic": "Ethernet Frames",
+      "text": "What is true about Ethernet frame with Length/Type 0x8100?",
+      "options": [
+        "Carries VLAN tag",
+        "Upper layer must be IP",
+        "Upper layer must be TCP",
+        "Upper layer must be UDP"
+      ],
+      "correctAnswer": 0,
+      "difficulty": "medium",
+      "explanation": "0x8100 indicates an 802.1Q VLAN tagged frame."
+    },
+    {
+      "id": 134,
+      "chapter": 12,
+      "topic": "ACL Types",
+      "text": "What is the number range of a basic ACL?",
+      "options": ["2000-2999", "3000-3999", "4000-4999", "6000-6031"],
+      "correctAnswer": 0,
+      "difficulty": "easy",
+      "explanation": "Basic ACLs use number range 2000-2999."
+    },
+    {
+      "id": 135,
+      "chapter": 19,
+      "topic": "IPv6 Addressing",
+      "text": "What type of IPv6 address is FE80::2E0:FCFF:FEEF:FEC?",
+      "options": [
+        "Link-local address",
+        "Multicast address",
+        "Unique local unicast address",
+        "Anycast address"
+      ],
+      "correctAnswer": 0,
+      "difficulty": "medium",
+      "explanation": "FE80::/10 prefix indicates link-local addresses for local network segment communication."
+    },
+    {
+      "id": 136,
+      "chapter": 3,
+      "topic": "File Management",
+      "text": "Which command can be used to permanently delete the old device configuration file?",
+      "options": [
+        "delete /force config.zip",
+        "delete /unreserved config.zip",
+        "reset config.zip",
+        "clear config.zip"
+      ],
+      "correctAnswer": 1,
+      "difficulty": "medium",
+      "explanation": "delete /unreserved permanently deletes files without moving them to recycle bin."
+    },
+    {
+      "id": 137,
+      "chapter": 14,
+      "topic": "NAT Configuration",
+      "text": "What must be configured on enterprise network egress router for internal hosts to access Internet?",
+      "options": [
+        "Easy IP",
+        "DHCP",
+        "BGP",
+        "Default route"
+      ],
+      "correctAnswer": 0,
+      "difficulty": "medium",
+      "explanation": "Easy IP (NAPT with interface IP) allows multiple private hosts to access Internet using the router's public interface IP."
+    },
+    {
+      "id": 138,
+      "chapter": 6,
+      "topic": "OSPF Areas",
+      "text": "Which statement is false about OSPF area partition?",
+      "options": [
+        "Routers have same LSDB in same OSPF area",
+        "Area partition reduces LSDB size",
+        "Area 0 is backbone area, others must connect to it",
+        "Only ABRs can function as ASBRs"
+      ],
+      "correctAnswer": 3,
+      "difficulty": "hard",
+      "explanation": "Any OSPF router can be an ASBR (Autonomous System Boundary Router) by redistributing external routes, not just ABRs."
+    }
+  ]
+}   
