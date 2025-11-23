@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Test Help Fix</title>
+</head>
+<body>
+    <h1>Help Command Test</h1>
+    <div id="testTerminal"></div>
+    <script>
+        // Test the help command
+        const commands = {
+            help: () => `Available Commands:\nhelp - Show help\nclear - Clear terminal`,
+            clear: () => 'Terminal cleared'
+        };
+        
+        function testHelp() {
+            const result = commands.help();
+            console.log('Help command result:', result);
+            document.getElementById('testTerminal').innerText = result;
+        }
+        
+        testHelp();
+    </script>
+</body>
+</html>
