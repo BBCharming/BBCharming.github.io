@@ -576,3 +576,65 @@ body {
         text-align: center;
     }
 }
+
+/* Enhanced Question Count Display */
+.question-count {
+    font-size: 11px !important;
+    color: var(--accent-primary);
+    margin-top: 5px;
+    font-weight: 600;
+}
+
+/* Enhanced Results Display */
+.answer-comparison {
+    display: flex;
+    justify-content: space-between;
+    margin: 8px 0;
+    flex-wrap: wrap;
+}
+
+.user-answer {
+    color: var(--text-secondary);
+}
+
+.correct-answer {
+    color: var(--success);
+    font-weight: 600;
+}
+
+.question-meta {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 8px;
+    font-size: 0.8em;
+    color: var(--text-muted);
+}
+
+.difficulty {
+    padding: 2px 6px;
+    border-radius: 4px;
+    font-weight: 600;
+}
+
+.difficulty.easy {
+    background: rgba(0, 255, 136, 0.2);
+    color: var(--success);
+}
+
+.difficulty.medium {
+    background: rgba(255, 170, 0, 0.2);
+    color: var(--warning);
+}
+
+.difficulty.hard {
+    background: rgba(255, 68, 68, 0.2);
+    color: var(--error);
+}
+
+.chapter-stats {
+    margin-top: 10px;
+    padding: 10px;
+    background: rgba(0, 212, 255, 0.1);
+    border-radius: 8px;
+    border-left: 3px solid var(--accent-primary);
+}
