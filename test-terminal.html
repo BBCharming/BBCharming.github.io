@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Terminal Test</title>
+    <script src="terminal-loader.js"></script>
+</head>
+<body>
+    <h1>Testing Terminal Loader</h1>
+    <div id="terminalEmbed"></div>
+    <script>
+        // Test if terminal loads
+        setTimeout(() => {
+            if (typeof initPortfolioTerminal === 'function') {
+                console.log('✅ initPortfolioTerminal function is available');
+                initPortfolioTerminal();
+            } else {
+                console.log('❌ initPortfolioTerminal function NOT available');
+            }
+        }, 100);
+    </script>
+</body>
+</html>
