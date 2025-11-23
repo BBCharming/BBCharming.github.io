@@ -1,4 +1,4 @@
-// HCIA Quiz Application - Enhanced Version
+// HCIA Quiz Application - Fixed Button Functions
 const quizState = {
     currentScreen: 'mainMenu',
     questions: [],
@@ -7,11 +7,7 @@ const quizState = {
     userAnswers: [],
     quizType: '',
     selectedChapter: null,
-    progress: JSON.parse(localStorage.getItem('hciaQuizProgress')) || {},
-    settings: JSON.parse(localStorage.getItem('hciaQuizSettings')) || {
-        soundEnabled: true,
-        animationEnabled: true
-    }
+    progress: JSON.parse(localStorage.getItem('hciaQuizProgress')) || {}
 };
 
 // HCIA Datacom Chapters
@@ -46,77 +42,134 @@ function initApp() {
     renderChapters();
     updateProgress();
     showScreen('mainMenu');
-    setupEventListeners();
-}
-
-function setupEventListeners() {
-    // Add keyboard navigation
-    document.addEventListener('keydown', (e) => {
-        if (e.key === 'Escape') {
-            showMainMenu();
-        }
-    });
 }
 
 // Load questions
 function loadQuestions() {
     try {
         fetch('data.json')
-            .then(response => response.json())
+            .then(response => {
+                if (!response.ok) throw new Error('Network response was not ok');
+                return response.json();
+            })
             .then(data => {
                 quizState.questions = data.questions;
                 console.log(`✅ Loaded ${quizState.questions.length} questions`);
-                updateQuestionCounts();
             })
             .catch(error => {
-                console.log('Using fallback questions');
+                console.log('Error loading data.json, using fallback questions:', error);
                 quizState.questions = getFallbackQuestions();
-                updateQuestionCounts();
             });
     } catch (error) {
         console.log('Using fallback questions');
         quizState.questions = getFallbackQuestions();
-        updateQuestionCounts();
     }
 }
 
-function updateQuestionCounts() {
-    // Update UI with question counts
-    const chapterCounts = {};
-    chapters.forEach(chapter => {
-        const count = quizState.questions.filter(q => q.chapter === chapter.id).length;
-        chapterCounts[chapter.id] = count;
+// Screen navigation - FIXED
+function showScreen(screenId) {
+    console.log('Showing screen:', screenId);
+    document.querySelectorAll('.screen').forEach(screen => {
+        screen.classList.remove('active');
     });
-    
-    // Update chapter cards with question counts
-    setTimeout(() => {
-        document.querySelectorAll('.chapter-card').forEach(card => {
-            const chapterId = parseInt(card.getAttribute('data-chapter-id'));
-            const count = chapterCounts[chapterId] || 0;
-            const countElement = card.querySelector('.question-count') || document.createElement('div');
-            if (!card.querySelector('.question-count')) {
-                countElement.className = 'question-count';
-                card.appendChild(countElement);
-            }
-            countElement.textContent = `${count} questions`;
-            countElement.style.color = count > 0 ? '#00d4ff' : '#64748b';
-            countElement.style.fontSize = '11px';
-            countElement.style.marginTop = '5px';
-        });
-    }, 100);
+    document.getElementById(screenId).classList.add('active');
+    quizState.currentScreen = screenId;
 }
 
-// [Rest of the functions remain the same as previous version, but with enhanced error handling]
-// ... (include all the previous functions from script.js)
+function showMainMenu() {
+    showScreen('mainMenu');
+    updateProgress();
+}
 
-// Enhanced question filtering for better distribution
+function showChapterSelection() {
+    showScreen('chapterSelection');
+}
+
+// Render chapters grid - FIXED
+function renderChapters() {
+    const chaptersGrid = document.getElementById('chaptersGrid');
+    if (!chaptersGrid) {
+        console.error('Chapters grid element not found!');
+        return;
+    }
+    
+    const chapterHTML = chapters.map(chapter => {
+        const chapterProgress = quizState.progress[chapter.id] || [];
+        const bestScore = chapterProgress.length > 0 ? 
+            Math.max(...chapterProgress.map(attempt => attempt.percentage)) : 0;
+        
+        return `
+            <div class="chapter-card" onclick="selectChapter(${chapter.id})" data-chapter-id="${chapter.id}">
+                <div class="chapter-number">${chapter.id}</div>
+                <div class="chapter-name">${chapter.name}</div>
+                ${bestScore > 0 ? `<div class="chapter-progress" style="color: ${getScoreColor(bestScore)}; margin-top: 8px; font-size: 12px;">
+                    Best: ${bestScore}%
+                </div>` : ''}
+            </div>
+        `;
+    }).join('');
+    
+    chaptersGrid.innerHTML = chapterHTML;
+}
+
+function getScoreColor(percentage) {
+    if (percentage >= 90) return '#00ff88';
+    if (percentage >= 80) return '#00d4ff';
+    if (percentage >= 70) return '#ffaa00';
+    return '#ff4444';
+}
+
+// Chapter selection - FIXED
+function selectChapter(chapterId) {
+    console.log('Selected chapter:', chapterId);
+    quizState.selectedChapter = chapterId;
+    const chapter = chapters.find(c => c.id === chapterId);
+    if (chapter && document.getElementById('settingsTitle')) {
+        document.getElementById('settingsTitle').textContent = `${chapter.name} - Quiz Settings`;
+    }
+    showScreen('quizSettings');
+}
+
+// Quiz initialization - FIXED BUTTON FUNCTIONS
+function startChapterQuiz() {
+    console.log('Starting chapter quiz');
+    quizState.quizType = 'chapter';
+    showChapterSelection();
+}
+
+function startRandomQuiz() {
+    console.log('Starting random quiz');
+    quizState.quizType = 'random';
+    if (document.getElementById('settingsTitle')) {
+        document.getElementById('settingsTitle').textContent = 'Random Quiz Settings';
+    }
+    showScreen('quizSettings');
+}
+
+function startExam() {
+    console.log('Starting exam');
+    quizState.quizType = 'exam';
+    if (document.getElementById('settingsTitle')) {
+        document.getElementById('settingsTitle').textContent = 'Final Exam Settings';
+    }
+    // Set default exam questions to 20
+    const questionCountSelect = document.getElementById('questionCount');
+    if (questionCountSelect) {
+        questionCountSelect.value = '20';
+    }
+    showScreen('quizSettings');
+}
+
 function startQuiz() {
+    console.log('Starting quiz with type:', quizState.quizType);
     const questionCount = parseInt(document.getElementById('questionCount').value);
     
+    // Filter questions based on quiz type
     let availableQuestions = [];
     
-    if (quizState.quizType === 'chapter') {
+    if (quizState.quizType === 'chapter' && quizState.selectedChapter) {
         availableQuestions = quizState.questions.filter(q => q.chapter === quizState.selectedChapter);
+        console.log(`Chapter ${quizState.selectedChapter} has ${availableQuestions.length} questions`);
     } else if (quizState.quizType === 'random') {
         availableQuestions = [...quizState.questions];
     } else if (quizState.quizType === 'exam') {
@@ -138,57 +191,274 @@ function startQuiz() {
     quizState.currentQuestionIndex = 0;
     quizState.userAnswers = new Array(quizState.currentQuestions.length).fill(null);
     
+    console.log(`Starting quiz with ${quizState.currentQuestions.length} questions`);
     showScreen('quizScreen');
     displayCurrentQuestion();
 }
 
-// Enhanced results with detailed statistics
+// Question display - FIXED
+function displayCurrentQuestion() {
+    if (quizState.currentQuestions.length === 0) {
+        showResults();
+        return;
+    }
+    
+    const question = quizState.currentQuestions[quizState.currentQuestionIndex];
+    const totalQuestions = quizState.currentQuestions.length;
+    
+    // Update header
+    if (document.getElementById('quizType')) {
+        document.getElementById('quizType').textContent = getQuizTypeName();
+    }
+    if (document.getElementById('questionCounter')) {
+        document.getElementById('questionCounter').textContent = 
+            `${quizState.currentQuestionIndex + 1}/${totalQuestions}`;
+    }
+    
+    // Update progress bar
+    const progressPercent = ((quizState.currentQuestionIndex) / totalQuestions) * 100;
+    const quizProgress = document.getElementById('quizProgress');
+    if (quizProgress) {
+        quizProgress.style.width = `${progressPercent}%`;
+    }
+    
+    // Display question
+    const questionText = document.getElementById('questionText');
+    if (questionText) {
+        questionText.textContent = question.question;
+    }
+    
+    // Display options
+    const optionsContainer = document.getElementById('optionsContainer');
+    if (optionsContainer) {
+        let optionsHTML = '';
+        
+        if (question.type === 'true_false') {
+            optionsHTML = `
+                <div class="option" onclick="selectOption('True')">A) True</div>
+                <div class="option" onclick="selectOption('False')">B) False</div>
+            `;
+        } else if (question.type === 'single_choice') {
+            optionsHTML = question.options.map((option, index) => `
+                <div class="option" onclick="selectOption('${String.fromCharCode(65 + index)}')">
+                    ${String.fromCharCode(65 + index)}) ${option}
+                </div>
+            `).join('');
+        }
+        
+        optionsContainer.innerHTML = optionsHTML;
+    }
+    
+    // Update navigation buttons
+    const prevBtn = document.getElementById('prevBtn');
+    const nextBtn = document.getElementById('nextBtn');
+    const finishBtn = document.getElementById('finishBtn');
+    
+    if (prevBtn) prevBtn.disabled = quizState.currentQuestionIndex === 0;
+    if (nextBtn) nextBtn.classList.toggle('hidden', quizState.currentQuestionIndex === totalQuestions - 1);
+    if (finishBtn) finishBtn.classList.toggle('hidden', quizState.currentQuestionIndex !== totalQuestions - 1);
+    
+    // Restore previous selection
+    const previousAnswer = quizState.userAnswers[quizState.currentQuestionIndex];
+    if (previousAnswer) {
+        highlightSelectedOption(previousAnswer);
+    }
+}
+
+function selectOption(selectedAnswer) {
+    quizState.userAnswers[quizState.currentQuestionIndex] = selectedAnswer;
+    highlightSelectedOption(selectedAnswer);
+}
+
+function highlightSelectedOption(selectedAnswer) {
+    const options = document.querySelectorAll('.option');
+    options.forEach(option => {
+        option.classList.remove('selected');
+    });
+    
+    if (selectedAnswer === 'True' || selectedAnswer === 'False') {
+        const optionIndex = selectedAnswer === 'True' ? 0 : 1;
+        if (options[optionIndex]) {
+            options[optionIndex].classList.add('selected');
+        }
+    } else {
+        const optionIndex = selectedAnswer.charCodeAt(0) - 65;
+        if (options[optionIndex]) {
+            options[optionIndex].classList.add('selected');
+        }
+    }
+}
+
+// Navigation - FIXED
+function nextQuestion() {
+    if (quizState.currentQuestionIndex < quizState.currentQuestions.length - 1) {
+        quizState.currentQuestionIndex++;
+        displayCurrentQuestion();
+    }
+}
+
+function previousQuestion() {
+    if (quizState.currentQuestionIndex > 0) {
+        quizState.currentQuestionIndex--;
+        displayCurrentQuestion();
+    }
+}
+
+// Results - FIXED
 function showResults() {
     const score = calculateScore();
     const totalQuestions = quizState.currentQuestions.length;
     const percentage = Math.round((score / totalQuestions) * 100);
     
-    // Calculate chapter performance if it's a chapter quiz
-    let chapterStats = '';
-    if (quizState.quizType === 'chapter' && quizState.selectedChapter) {
-        const chapter = chapters.find(c => c.id === quizState.selectedChapter);
-        chapterStats = `<div class="chapter-stats">Chapter ${quizState.selectedChapter}: ${chapter?.name || 'Unknown'}</div>`;
-    }
+    const finalScore = document.getElementById('finalScore');
+    const scorePercentage = document.getElementById('scorePercentage');
+    const resultsMessage = document.getElementById('resultsMessage');
     
-    document.getElementById('finalScore').textContent = `${score}/${totalQuestions}`;
-    document.getElementById('scorePercentage').textContent = `${percentage}%`;
-    document.getElementById('resultsMessage').innerHTML = getResultsMessage(percentage) + chapterStats;
+    if (finalScore) finalScore.textContent = `${score}/${totalQuestions}`;
+    if (scorePercentage) scorePercentage.textContent = `${percentage}%`;
+    if (resultsMessage) resultsMessage.textContent = getResultsMessage(percentage);
     
-    // Build enhanced results list
+    // Build results list
     const resultsList = document.getElementById('resultsList');
-    resultsList.innerHTML = quizState.currentQuestions.map((question, index) => {
-        const userAnswer = quizState.userAnswers[index];
-        const isCorrect = isAnswerCorrect(question, userAnswer);
-        const correctAnswer = getCorrectAnswerText(question);
-        const chapter = chapters.find(c => c.id === question.chapter);
-        
-        return `
-            <div class="result-item ${isCorrect ? 'correct' : 'incorrect'}">
-                <strong>Q${index + 1} (Ch. ${question.chapter}): ${question.question}</strong>
-                <div class="answer-comparison">
-                    <span class="user-answer">Your answer: ${userAnswer || 'Not answered'}</span>
-                    <span class="correct-answer">Correct: ${correctAnswer}</span>
+    if (resultsList) {
+        resultsList.innerHTML = quizState.currentQuestions.map((question, index) => {
+            const userAnswer = quizState.userAnswers[index];
+            const isCorrect = isAnswerCorrect(question, userAnswer);
+            const correctAnswer = getCorrectAnswerText(question);
+            
+            return `
+                <div class="result-item ${isCorrect ? 'correct' : 'incorrect'}">
+                    <strong>Q${index + 1}: ${question.question}</strong>
+                    <div>Your answer: ${userAnswer || 'Not answered'}</div>
+                    <div>Correct answer: ${correctAnswer}</div>
+                    ${!isCorrect && question.explanation ? `<div class="explanation">${question.explanation}</div>` : ''}
                 </div>
-                ${!isCorrect && question.explanation ? `<div class="explanation">💡 ${question.explanation}</div>` : ''}
-                <div class="question-meta">
-                    <span class="difficulty ${question.difficulty}">${question.difficulty}</span>
-                    <span class="chapter">Chapter ${question.chapter}: ${chapter?.name || 'Unknown'}</span>
-                </div>
-            </div>
-        `;
-    }).join('');
+            `;
+        }).join('');
+    }
     
     // Update progress
     updateUserProgress(score, totalQuestions);
     showScreen('resultsScreen');
 }
 
-// [Include all other functions from the previous script.js version]
+function calculateScore() {
+    return quizState.currentQuestions.reduce((score, question, index) => {
+        return score + (isAnswerCorrect(question, quizState.userAnswers[index]) ? 1 : 0);
+    }, 0);
+}
+
+function isAnswerCorrect(question, userAnswer) {
+    if (!userAnswer) return false;
+    
+    if (question.type === 'true_false') {
+        return userAnswer === question.correct_answer;
+    } else if (question.type === 'single_choice') {
+        const correctIndex = question.correct_answer.charCodeAt(0) - 65;
+        const userIndex = userAnswer.charCodeAt(0) - 65;
+        return userIndex === correctIndex;
+    }
+    return false;
+}
+
+function getCorrectAnswerText(question) {
+    if (question.type === 'true_false') {
+        return question.correct_answer;
+    } else if (question.type === 'single_choice') {
+        const index = question.correct_answer.charCodeAt(0) - 65;
+        return question.options[index];
+    }
+    return question.correct_answer;
+}
+
+function retryQuiz() {
+    startQuiz();
+}
+
+// Progress tracking - FIXED
+function updateUserProgress(score, totalQuestions) {
+    const percentage = (score / totalQuestions) * 100;
+    
+    if (quizState.quizType === 'chapter' && quizState.selectedChapter) {
+        if (!quizState.progress[quizState.selectedChapter]) {
+            quizState.progress[quizState.selectedChapter] = [];
+        }
+        quizState.progress[quizState.selectedChapter].push({
+            score,
+            total: totalQuestions,
+            percentage,
+            timestamp: new Date().toISOString()
+        });
+        
+        // Keep only last 5 attempts per chapter
+        if (quizState.progress[quizState.selectedChapter].length > 5) {
+            quizState.progress[quizState.selectedChapter] = 
+                quizState.progress[quizState.selectedChapter].slice(-5);
+        }
+    }
+    
+    localStorage.setItem('hciaQuizProgress', JSON.stringify(quizState.progress));
+    updateProgress();
+}
+
+function updateProgress() {
+    const chaptersWithProgress = Object.keys(quizState.progress).length;
+    const totalProgress = (chaptersWithProgress / chapters.length) * 100;
+    
+    const progressText = document.getElementById('progressText');
+    const progressFill = document.getElementById('progressFill');
+    
+    if (progressText) progressText.textContent = `${Math.round(totalProgress)}% Complete`;
+    if (progressFill) progressFill.style.width = `${totalProgress}%`;
+}
+
+// Utility functions
+function getQuizTypeName() {
+    switch (quizState.quizType) {
+        case 'chapter': 
+            const chapter = chapters.find(c => c.id === quizState.selectedChapter);
+            return `Chapter ${quizState.selectedChapter}: ${chapter?.name || 'Quiz'}`;
+        case 'random': return 'Random Quiz';
+        case 'exam': return 'Final Exam';
+        default: return 'Quiz';
+    }
+}
+
+function getResultsMessage(percentage) {
+    if (percentage >= 90) return "🎉 Excellent! You're mastering HCIA-Datacom!";
+    if (percentage >= 80) return "👍 Great job! Strong understanding of the material.";
+    if (percentage >= 70) return "💪 Good work! Keep practicing to improve.";
+    if (percentage >= 60) return "📚 Not bad! Review the explanations below.";
+    return "📖 Keep studying! Focus on the explanations and try again.";
+}
+
+// Fallback questions
+function getFallbackQuestions() {
+    return [
+        {
+            "id": 1,
+            "chapter": 1,
+            "chapter_name": "Data Communication Network Basis",
+            "topic": "Network Fundamentals",
+            "type": "true_false",
+            "question": "Making a call on a landline telephone is a type of network communication.",
+            "correct_answer": "True",
+            "explanation": "Traditional telephone systems are indeed a form of network communication, establishing dedicated circuits for voice transmission.",
+            "difficulty": "easy"
+        },
+        {
+            "id": 2,
+            "chapter": 1,
+            "chapter_name": "Data Communication Network Basis",
+            "topic": "Network Devices", 
+            "type": "true_false",
+            "question": "A gateway must be configured for communication between a host and other hosts.",
+            "correct_answer": "False",
+            "explanation": "A gateway is only required when communicating with devices on different networks. Hosts on the same network can communicate directly.",
+            "difficulty": "medium"
+        }
+    ];
+}
 
 // Initialize app when page loads
 document.addEventListener('DOMContentLoaded', initApp);
