@@ -3,11 +3,12 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>HCIA-Datacom Quiz - BB Charming</title>
+    <title>HCIA-Datacom Quiz</title>
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
     <div class="container">
+        <!-- Header -->
         <header class="header">
             <h1>HCIA-Datacom Quiz</h1>
             <div class="progress">
@@ -21,21 +22,32 @@
         <!-- Main Menu -->
         <div id="mainMenu" class="screen active">
             <div class="menu-card">
-                <h2>Welcome to HCIA-Datacom Prep</h2>
-                <p class="menu-subtitle">Select your quiz type:</p>
+                <h2>HCIA-Datacom Certification Prep</h2>
+                <p class="menu-subtitle">22 Chapters • 138+ Questions • Progress Tracking</p>
                 <div class="menu-options">
                     <button class="btn-primary" onclick="startChapterQuiz()">
-                        📚 Chapter Quiz
+                        Chapter Quiz
                     </button>
                     <button class="btn-secondary" onclick="startRandomQuiz()">
-                        🎲 Random Quiz
+                        Random Quiz
                     </button>
                     <button class="btn-secondary" onclick="startExam()">
-                        ⚡ Final Exam
+                        Final Exam
                     </button>
                 </div>
-                <div class="menu-footer">
-                    <p>22 Chapters • 138+ Questions • Progress Tracking</p>
+                <div class="quick-stats">
+                    <div class="stat-item">
+                        <span class="stat-number" id="totalQuestions">138</span>
+                        <span class="stat-label">Total Questions</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-number" id="chaptersCompleted">0</span>
+                        <span class="stat-label">Chapters Completed</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-number" id="avgScore">0%</span>
+                        <span class="stat-label">Average Score</span>
+                    </div>
                 </div>
             </div>
         </div>
@@ -45,6 +57,9 @@
             <div class="screen-header">
                 <button class="btn-back" onclick="showMainMenu()">← Back</button>
                 <h2>Select Chapter</h2>
+                <div class="chapter-filter">
+                    <input type="text" id="chapterSearch" placeholder="Search chapters..." onkeyup="filterChapters()">
+                </div>
             </div>
             <div class="chapters-grid" id="chaptersGrid">
                 <!-- Chapters loaded dynamically -->
@@ -54,17 +69,25 @@
         <!-- Quiz Settings -->
         <div id="quizSettings" class="screen">
             <div class="screen-header">
-                <button class="btn-back" onclick="showChapterSelection()">← Back</button>
+                <button class="btn-back" id="settingsBackBtn">← Back</button>
                 <h2 id="settingsTitle">Quiz Settings</h2>
             </div>
             <div class="settings-card">
-                <label for="questionCount">Number of Questions:</label>
-                <select id="questionCount">
-                    <option value="5">5 Questions</option>
-                    <option value="10" selected>10 Questions</option>
-                    <option value="15">15 Questions</option>
-                    <option value="20">20 Questions</option>
-                </select>
+                <div class="setting-group">
+                    <label for="questionCount">Number of Questions:</label>
+                    <select id="questionCount">
+                        <!-- Options loaded dynamically based on quiz type -->
+                    </select>
+                </div>
+                <div class="setting-group">
+                    <label for="difficultyFilter">Difficulty:</label>
+                    <select id="difficultyFilter">
+                        <option value="all">All Difficulties</option>
+                        <option value="easy">Easy Only</option>
+                        <option value="medium">Medium Only</option>
+                        <option value="hard">Hard Only</option>
+                    </select>
+                </div>
                 <button class="btn-primary" onclick="startQuiz()">Start Quiz</button>
             </div>
         </div>
@@ -75,6 +98,7 @@
                 <div class="quiz-info">
                     <span id="quizType">Chapter Quiz</span>
                     <span id="questionCounter">1/10</span>
+                    <span class="difficulty-badge" id="currentDifficulty">Medium</span>
                 </div>
                 <div class="progress-bar small">
                     <div class="progress-fill" id="quizProgress"></div>
@@ -82,6 +106,10 @@
             </div>
 
             <div class="question-card">
+                <div class="question-meta">
+                    <span class="chapter-tag" id="questionChapter">Chapter 1</span>
+                    <span class="topic-tag" id="questionTopic">Network Fundamentals</span>
+                </div>
                 <div class="question-text" id="questionText"></div>
                 <div class="options-container" id="optionsContainer">
                     <!-- Options loaded dynamically -->
@@ -91,7 +119,7 @@
             <div class="quiz-controls">
                 <button class="btn-secondary" onclick="previousQuestion()" id="prevBtn">Previous</button>
                 <button class="btn-primary" onclick="nextQuestion()" id="nextBtn">Next</button>
-                <button class="btn-primary hidden" onclick="showResults()" id="finishBtn">Finish</button>
+                <button class="btn-primary hidden" onclick="showResults()" id="finishBtn">Finish Quiz</button>
             </div>
         </div>
 
@@ -99,9 +127,26 @@
         <div id="resultsScreen" class="screen">
             <div class="results-card">
                 <h2>Quiz Results</h2>
-                <div class="score" id="finalScore">0/0</div>
-                <div class="score-percentage" id="scorePercentage">0%</div>
+                <div class="score-container">
+                    <div class="score" id="finalScore">0/0</div>
+                    <div class="score-percentage" id="scorePercentage">0%</div>
+                </div>
                 <div class="results-message" id="resultsMessage"></div>
+                
+                <div class="results-stats">
+                    <div class="stat">
+                        <span class="stat-value" id="correctAnswers">0</span>
+                        <span class="stat-label">Correct</span>
+                    </div>
+                    <div class="stat">
+                        <span class="stat-value" id="incorrectAnswers">0</span>
+                        <span class="stat-label">Incorrect</span>
+                    </div>
+                    <div class="stat">
+                        <span class="stat-value" id="timeSpent">0s</span>
+                        <span class="stat-label">Time</span>
+                    </div>
+                </div>
                 
                 <div class="results-details">
                     <h3>Review Answers</h3>
@@ -110,8 +155,20 @@
 
                 <div class="results-actions">
                     <button class="btn-secondary" onclick="retryQuiz()">Retry Quiz</button>
+                    <button class="btn-secondary" onclick="showWeakAreas()">Review Weak Areas</button>
                     <button class="btn-primary" onclick="showMainMenu()">Main Menu</button>
                 </div>
+            </div>
+        </div>
+
+        <!-- Weak Areas Screen -->
+        <div id="weakAreas" class="screen">
+            <div class="screen-header">
+                <button class="btn-back" onclick="showResults()">← Back</button>
+                <h2>Weak Areas to Review</h2>
+            </div>
+            <div class="weak-areas-list" id="weakAreasList">
+                <!-- Weak areas loaded dynamically -->
             </div>
         </div>
     </div>
