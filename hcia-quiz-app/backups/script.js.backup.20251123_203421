@@ -1,6 +1,4 @@
-// HCIA Quiz Application - Complete Fixed Version
-console.log("🚀 HCIA Quiz Application Initializing...");
-
+// Enhanced HCIA Quiz Application with Fixed Question Distribution
 const quizState = {
     currentScreen: 'mainMenu',
     questions: [],
@@ -42,61 +40,38 @@ const chapters = [
 
 // Initialize the application
 async function initApp() {
-    console.log("🔧 Initializing HCIA Quiz App...");
     await loadQuestions();
-    setupEventListeners();
     renderChapters();
     updateProgress();
     updateQuickStats();
+    setupEventListeners();
     showScreen('mainMenu');
-    console.log("✅ HCIA Quiz App Ready!");
 }
 
 // Setup event listeners
 function setupEventListeners() {
-    console.log("🔧 Setting up event listeners...");
-    
-    // Fix back button navigation
-    const backBtn = document.getElementById('settingsBackBtn');
-    if (backBtn) {
-        backBtn.addEventListener('click', function() {
-            console.log("🔙 Back button clicked, quizType:", quizState.quizType);
-            if (quizState.quizType === 'chapter') {
-                showChapterSelection();
-            } else {
-                showMainMenu();
-            }
-        });
-    }
-    
-    // Enter key support for chapter search
-    const searchInput = document.getElementById('chapterSearch');
-    if (searchInput) {
-        searchInput.addEventListener('keypress', function(e) {
-            if (e.key === 'Enter') {
-                filterChapters();
-            }
-        });
-    }
-    
-    console.log("✅ Event listeners setup complete");
+    document.getElementById('settingsBackBtn').addEventListener('click', function() {
+        if (quizState.quizType === 'chapter') {
+            showChapterSelection();
+        } else {
+            showMainMenu();
+        }
+    });
 }
 
-// Load questions from JSON file with fallback
+// Load questions from JSON file
 async function loadQuestions() {
-    console.log("📥 Loading questions...");
     try {
         const response = await fetch('data.json');
-        if (!response.ok) throw new Error('data.json not found');
         const data = await response.json();
         quizState.questions = data.questions;
-        console.log(`✅ Loaded ${quizState.questions.length} questions from data.json`);
+        console.log(`✅ Loaded ${quizState.questions.length} questions`);
+        updateQuickStats();
     } catch (error) {
-        console.warn('❌ Could not load data.json, using fallback questions:', error.message);
+        console.error('Error loading questions:', error);
         quizState.questions = getFallbackQuestions();
-        console.log(`✅ Loaded ${quizState.questions.length} fallback questions`);
+        updateQuickStats();
     }
-    updateQuickStats();
 }
 
 // Update quick stats in main menu
@@ -105,15 +80,9 @@ function updateQuickStats() {
     const chaptersCompleted = Object.keys(quizState.progress).length;
     const avgScore = calculateAverageScore();
     
-    const totalEl = document.getElementById('totalQuestions');
-    const completedEl = document.getElementById('chaptersCompleted');
-    const avgEl = document.getElementById('avgScore');
-    
-    if (totalEl) totalEl.textContent = totalQuestions;
-    if (completedEl) completedEl.textContent = chaptersCompleted;
-    if (avgEl) avgEl.textContent = avgScore + '%';
-    
-    console.log(`📊 Stats updated: ${totalQuestions} questions, ${chaptersCompleted} chapters completed, ${avgScore}% avg`);
+    document.getElementById('totalQuestions').textContent = totalQuestions;
+    document.getElementById('chaptersCompleted').textContent = chaptersCompleted;
+    document.getElementById('avgScore').textContent = avgScore + '%';
 }
 
 function calculateAverageScore() {
@@ -132,21 +101,15 @@ function calculateAverageScore() {
 
 // Screen navigation
 function showScreen(screenId) {
-    console.log(`🔄 Switching to screen: ${screenId}`);
     document.querySelectorAll('.screen').forEach(screen => {
         screen.classList.remove('active');
     });
-    
-    const targetScreen = document.getElementById(screenId);
-    if (targetScreen) {
-        targetScreen.classList.add('active');
-        quizState.currentScreen = screenId;
-    } else {
-        console.error(`❌ Screen not found: ${screenId}`);
-    }
+    document.getElementById(screenId).classList.add('active');
+    quizState.currentScreen = screenId;
     
     if (screenId === 'mainMenu') {
         updateQuickStats();
+        updateProgress();
     }
 }
 
@@ -163,29 +126,21 @@ function filterChapters() {
     const searchTerm = document.getElementById('chapterSearch').value.toLowerCase();
     const chapterCards = document.querySelectorAll('.chapter-card');
     
-    let visibleCount = 0;
     chapterCards.forEach(card => {
         const chapterName = card.querySelector('.chapter-name').textContent.toLowerCase();
         const chapterNumber = card.querySelector('.chapter-number').textContent;
         
         if (chapterName.includes(searchTerm) || chapterNumber.includes(searchTerm)) {
             card.style.display = 'block';
-            visibleCount++;
         } else {
             card.style.display = 'none';
         }
     });
-    
-    console.log(`🔍 Filtered chapters: ${visibleCount} visible`);
 }
 
 // Render chapters grid with progress
 function renderChapters() {
     const chaptersGrid = document.getElementById('chaptersGrid');
-    if (!chaptersGrid) {
-        console.error('❌ chaptersGrid element not found');
-        return;
-    }
     
     const chapterHTML = chapters.map(chapter => {
         const chapterQuestions = quizState.questions.filter(q => q.chapter === chapter.id).length;
@@ -207,8 +162,7 @@ function renderChapters() {
         `;
     }).join('');
     
-    chaptersGrid.innerHTML = chapterHTML;
-    console.log(`✅ Rendered ${chapters.length} chapters`);
+    if (chaptersGrid) chaptersGrid.innerHTML = chapterHTML;
 }
 
 function getProgressClass(percentage) {
@@ -218,9 +172,15 @@ function getProgressClass(percentage) {
     return 'poor';
 }
 
+function getScoreColor(percentage) {
+    if (percentage >= 90) return '#00ff88';
+    if (percentage >= 80) return '#00d4ff';
+    if (percentage >= 70) return '#ffaa00';
+    return '#ff4444';
+}
+
 // Chapter selection
 function selectChapter(chapterId) {
-    console.log(`📚 Chapter selected: ${chapterId}`);
     quizState.selectedChapter = chapterId;
     const chapter = chapters.find(c => c.id === chapterId);
     const chapterQuestions = quizState.questions.filter(q => q.chapter === chapterId).length;
@@ -228,19 +188,16 @@ function selectChapter(chapterId) {
     document.getElementById('settingsTitle').textContent = 
         `Chapter ${chapterId}: ${chapter.name}`;
     
+    // Update question count options based on available questions
     updateQuestionOptions(chapterQuestions);
+    
     showScreen('quizSettings');
 }
 
 // Update question options based on available questions
 function updateQuestionOptions(maxQuestions) {
     const questionCountSelect = document.getElementById('questionCount');
-    if (!questionCountSelect) {
-        console.error('❌ questionCount select element not found');
-        return;
-    }
-    
-    let options = [];
+    const options = [];
     
     if (quizState.quizType === 'exam') {
         // Exam sessions: 50, 50, 38
@@ -255,50 +212,42 @@ function updateQuestionOptions(maxQuestions) {
                 options.push(`<option value="${session.value}">${session.label}</option>`);
             }
         });
-        
-        // If no session fits, add max available
-        if (options.length === 0 && maxQuestions > 0) {
-            options.push(`<option value="${maxQuestions}">All ${maxQuestions} Questions</option>`);
-        }
     } else {
         // Chapter and Random quiz options
         const standardOptions = [5, 10, 15, 20, 25, 30];
         standardOptions.forEach(opt => {
             if (opt <= maxQuestions) {
-                const selected = opt === 10 ? 'selected' : '';
-                options.push(`<option value="${opt}" ${selected}>${opt} Questions</option>`);
+                options.push(`<option value="${opt}" ${opt === 10 ? 'selected' : ''}>${opt} Questions</option>`);
             }
         });
         
-        // Always add the maximum available if not already included
+        // Always add the maximum available
         if (maxQuestions > 0 && !options.some(opt => opt.includes(`value="${maxQuestions}"`))) {
             options.push(`<option value="${maxQuestions}">All ${maxQuestions} Questions</option>`);
         }
     }
     
     questionCountSelect.innerHTML = options.join('');
-    console.log(`✅ Updated question options: ${options.length} options for max ${maxQuestions} questions`);
 }
 
 // Quiz initialization
 function startChapterQuiz() {
-    console.log("🎯 Starting Chapter Quiz");
     quizState.quizType = 'chapter';
     showChapterSelection();
 }
 
 function startRandomQuiz() {
-    console.log("🎲 Starting Random Quiz");
     quizState.quizType = 'random';
     document.getElementById('settingsTitle').textContent = 'Random Quiz Settings';
+    // For random quiz, allow up to 50 questions
     updateQuestionOptions(Math.min(50, quizState.questions.length));
     showScreen('quizSettings');
 }
 
 function startExam() {
-    console.log("📝 Starting Final Exam");
     quizState.quizType = 'exam';
     document.getElementById('settingsTitle').textContent = 'Final Exam Settings';
+    // For final exam, use session-based options
     updateQuestionOptions(quizState.questions.length);
     showScreen('quizSettings');
 }
@@ -307,22 +256,20 @@ function startQuiz() {
     const questionCount = parseInt(document.getElementById('questionCount').value);
     const difficultyFilter = document.getElementById('difficultyFilter').value;
     
-    console.log(`🚀 Starting quiz: ${questionCount} questions, difficulty: ${difficultyFilter}, type: ${quizState.quizType}`);
-    
     let availableQuestions = [];
     
-    // Filter questions based on quiz type
+    // Filter questions based on quiz type and difficulty
     if (quizState.quizType === 'chapter') {
         availableQuestions = quizState.questions.filter(q => q.chapter === quizState.selectedChapter);
-        console.log(`📚 Chapter ${quizState.selectedChapter} questions: ${availableQuestions.length}`);
-    } else {
+    } else if (quizState.quizType === 'random') {
+        availableQuestions = [...quizState.questions];
+    } else if (quizState.quizType === 'exam') {
         availableQuestions = [...quizState.questions];
     }
     
     // Apply difficulty filter
     if (difficultyFilter !== 'all') {
         availableQuestions = availableQuestions.filter(q => q.difficulty === difficultyFilter);
-        console.log(`🎯 Difficulty filtered: ${availableQuestions.length} questions`);
     }
     
     // Shuffle and select questions
@@ -332,12 +279,10 @@ function startQuiz() {
     quizState.quizStartTime = Date.now();
     
     if (quizState.currentQuestions.length === 0) {
-        alert('❌ No questions available with the selected criteria. Please try different settings.');
-        console.error('No questions available after filtering');
+        alert('No questions available with the selected criteria. Please try different settings.');
         return;
     }
     
-    console.log(`✅ Quiz ready: ${quizState.currentQuestions.length} questions loaded`);
     showQuizScreen();
 }
 
@@ -359,17 +304,11 @@ function displayCurrentQuestion() {
     const question = quizState.currentQuestions[quizState.currentQuestionIndex];
     const totalQuestions = quizState.currentQuestions.length;
     
-    if (!question) {
-        console.error('❌ No question found at index:', quizState.currentQuestionIndex);
-        return;
-    }
-    
     // Update progress
     document.getElementById('questionCounter').textContent = 
         `${quizState.currentQuestionIndex + 1}/${totalQuestions}`;
-    
-    const progressPercent = ((quizState.currentQuestionIndex + 1) / totalQuestions) * 100;
-    document.getElementById('quizProgress').style.width = `${progressPercent}%`;
+    document.getElementById('quizProgress').style.width = 
+        `${((quizState.currentQuestionIndex + 1) / totalQuestions) * 100}%`;
     
     // Update quiz type display
     let quizTypeText = 'Chapter Quiz';
@@ -381,9 +320,8 @@ function displayCurrentQuestion() {
     document.getElementById('questionChapter').textContent = `Chapter ${question.chapter}`;
     document.getElementById('questionTopic').textContent = question.topic || chapters.find(c => c.id === question.chapter)?.name || 'General';
     document.getElementById('questionText').textContent = question.text;
-    
-    const difficultyText = question.difficulty.charAt(0).toUpperCase() + question.difficulty.slice(1);
-    document.getElementById('currentDifficulty').textContent = difficultyText;
+    document.getElementById('currentDifficulty').textContent = 
+        question.difficulty.charAt(0).toUpperCase() + question.difficulty.slice(1);
     
     // Update options
     const optionsContainer = document.getElementById('optionsContainer');
@@ -406,8 +344,6 @@ function displayCurrentQuestion() {
         quizState.currentQuestionIndex === totalQuestions - 1);
     document.getElementById('finishBtn').classList.toggle('hidden', 
         quizState.currentQuestionIndex !== totalQuestions - 1);
-    
-    console.log(`📝 Displaying question ${quizState.currentQuestionIndex + 1}/${totalQuestions}`);
 }
 
 function selectOption(optionIndex) {
@@ -438,8 +374,6 @@ function showResults() {
     const percentage = Math.round((correctAnswers / totalQuestions) * 100);
     const timeSpent = Math.round((Date.now() - quizState.quizStartTime) / 1000);
     
-    console.log(`📊 Quiz completed: ${correctAnswers}/${totalQuestions} (${percentage}%) in ${timeSpent}s`);
-    
     // Update results display
     document.getElementById('finalScore').textContent = `${correctAnswers}/${totalQuestions}`;
     document.getElementById('scorePercentage').textContent = `${percentage}%`;
@@ -449,19 +383,14 @@ function showResults() {
     
     // Update results message
     let message = '';
-    let messageClass = '';
     if (percentage >= 90) {
-        message = '🎉 Excellent! You have mastered this content.';
-        messageClass = 'excellent';
+        message = 'Excellent! You have mastered this content.';
     } else if (percentage >= 80) {
-        message = '👍 Great job! You have a good understanding.';
-        messageClass = 'good';
+        message = 'Great job! You have a good understanding.';
     } else if (percentage >= 70) {
-        message = '💪 Good effort! Review the incorrect answers.';
-        messageClass = 'average';
+        message = 'Good effort! Review the incorrect answers.';
     } else {
-        message = '📚 Keep practicing! Focus on the weak areas.';
-        messageClass = 'poor';
+        message = 'Keep practicing! Focus on the weak areas.';
     }
     document.getElementById('resultsMessage').textContent = message;
     
@@ -495,8 +424,6 @@ function updateProgressTracking(correct, total, percentage) {
         
         localStorage.setItem('hciaQuizProgress', JSON.stringify(quizState.progress));
         updateProgress();
-        
-        console.log(`💾 Progress saved for chapter ${chapterId}: ${percentage}%`);
     }
 }
 
@@ -506,12 +433,11 @@ function updateProgress() {
     const progressPercentage = Math.round((completedChapters / totalChapters) * 100);
     
     document.getElementById('progressText').textContent = `${progressPercentage}% Complete`;
+    document.getElementById('progressFill').style.width = `${progressPercentage}%`;
     
+    // Add progress class for color coding
     const progressFill = document.getElementById('progressFill');
-    progressFill.style.width = `${progressPercentage}%`;
     progressFill.className = 'progress-fill ' + getProgressClass(progressPercentage);
-    
-    console.log(`📈 Progress updated: ${completedChapters}/${totalChapters} chapters (${progressPercentage}%)`);
 }
 
 function showResultsDetails() {
@@ -525,33 +451,23 @@ function showResultsDetails() {
         const resultItem = document.createElement('div');
         resultItem.className = `result-item ${isCorrect ? 'correct' : 'incorrect'}`;
         
-        let userAnswerText = 'Not answered';
-        if (userAnswer !== null && userAnswer !== undefined) {
-            userAnswerText = question.options[userAnswer];
-        }
-        
         resultItem.innerHTML = `
             <strong>Question ${index + 1}: ${isCorrect ? '✓ Correct' : '✗ Incorrect'}</strong>
             <div>${question.text}</div>
-            <div><strong>Your answer:</strong> ${userAnswerText}</div>
-            ${!isCorrect ? `<div><strong>Correct answer:</strong> ${question.options[question.correctAnswer]}</div>` : ''}
-            ${question.explanation ? `<div class="explanation"><strong>Explanation:</strong> ${question.explanation}</div>` : ''}
+            <div>Your answer: ${userAnswer !== null ? question.options[userAnswer] : 'Not answered'}</div>
+            ${!isCorrect ? `<div>Correct answer: ${question.options[question.correctAnswer]}</div>` : ''}
+            ${question.explanation ? `<div class="explanation">Explanation: ${question.explanation}</div>` : ''}
         `;
         
         resultsList.appendChild(resultItem);
     });
-    
-    console.log(`📋 Results details: ${quizState.currentQuestions.length} questions displayed`);
 }
 
 function retryQuiz() {
-    console.log("🔄 Retrying quiz...");
     startQuiz();
 }
 
 function showWeakAreas() {
-    console.log("🔍 Analyzing weak areas...");
-    
     // Calculate weak areas based on incorrect answers
     quizState.weakAreas = [];
     const chapterErrors = {};
@@ -586,43 +502,42 @@ function showWeakAreas() {
     weakAreasList.innerHTML = '';
     
     if (quizState.weakAreas.length === 0) {
-        weakAreasList.innerHTML = '<div class="weak-area-item"><h4>🎉 No Weak Areas Found!</h4><p>Great job! You answered all questions correctly.</p></div>';
+        weakAreasList.innerHTML = '<div class="weak-area-item"><h4>No Weak Areas Found!</h4><p>Great job! You answered all questions correctly.</p></div>';
     } else {
         quizState.weakAreas.forEach(area => {
             const areaItem = document.createElement('div');
             areaItem.className = 'weak-area-item';
             areaItem.innerHTML = `
                 <h4>Chapter ${area.chapterId}: ${area.chapterName}</h4>
-                <p><strong>Incorrect answers:</strong> ${area.errorCount}</p>
+                <p>Incorrect answers: ${area.errorCount}</p>
                 <button class="btn-secondary" onclick="practiceChapter(${area.chapterId})">Practice This Chapter</button>
             `;
             weakAreasList.appendChild(areaItem);
         });
     }
     
-    console.log(`📉 Weak areas identified: ${quizState.weakAreas.length} chapters need improvement`);
     showScreen('weakAreas');
 }
 
 function practiceChapter(chapterId) {
-    console.log(`📚 Practicing chapter: ${chapterId}`);
     quizState.quizType = 'chapter';
     selectChapter(chapterId);
 }
 
-// Comprehensive fallback questions
+// Fallback questions in case data.json fails to load
 function getFallbackQuestions() {
-    console.log("🔄 Loading fallback questions...");
+    // This would contain all 138+ questions as per your categorization
+    // For brevity, I'm including a sample - you would expand this with all questions
     return [
         {
             id: 1,
             chapter: 1,
-            topic: "Network Communication",
+            topic: "Basic Networking",
             text: "Making a call on a landline telephone is a type of network communication.",
             options: ["True", "False"],
             correctAnswer: 0,
             difficulty: "easy",
-            explanation: "Landline telephone communication uses circuit-switched networks, which is a form of network communication."
+            explanation: "Landline telephone communication is indeed a form of network communication, specifically circuit-switched networking."
         },
         {
             id: 2,
@@ -630,140 +545,18 @@ function getFallbackQuestions() {
             topic: "OSI Model",
             text: "What are the components of the OSI reference model from top to bottom?",
             options: [
-                "Application, Presentation, Session, Transport, Network, Data Link, Physical",
-                "Physical, Data Link, Network, Transport, Session, Presentation, Application",
-                "Application, Session, Presentation, Transport, Network, Data Link, Physical",
-                "Physical, Network, Data Link, Transport, Session, Presentation, Application"
+                "Application, presentation, session, transport, network, data link, physical",
+                "Physical, data link, network, transport, session, presentation, application", 
+                "Application, session, presentation, transport, network, data link, physical",
+                "Physical, network, data link, transport, session, presentation, application"
             ],
             correctAnswer: 0,
             difficulty: "medium",
             explanation: "The OSI model layers from top to bottom are: Application, Presentation, Session, Transport, Network, Data Link, Physical."
-        },
-        {
-            id: 3,
-            chapter: 1,
-            topic: "Gateway Configuration",
-            text: "A gateway must be configured for communication between a host and other hosts.",
-            options: ["True", "False"],
-            correctAnswer: 1,
-            difficulty: "easy",
-            explanation: "A gateway is only needed when communicating with hosts on different networks. Hosts on the same network can communicate directly without a gateway."
-        },
-        {
-            id: 4,
-            chapter: 1,
-            topic: "Router Functions",
-            text: "Which statement about routers is false?",
-            options: [
-                "Routers operate at the network layer",
-                "Routers can connect different network types",
-                "A router cannot isolate broadcast domains",
-                "Routers use IP addresses for forwarding decisions"
-            ],
-            correctAnswer: 2,
-            difficulty: "medium",
-            explanation: "Routers DO isolate broadcast domains - each router interface creates a separate broadcast domain, which is one of their key functions."
-        },
-        {
-            id: 5,
-            chapter: 2,
-            topic: "Network Layer Protocols",
-            text: "When the host accesses web service, the value of the 'Protocol' field at the network layer is 6.",
-            options: ["True", "False"],
-            correctAnswer: 0,
-            difficulty: "medium",
-            explanation: "The protocol field value 6 indicates TCP, which is used for web services (HTTP/HTTPS)."
-        },
-        {
-            id: 6,
-            chapter: 2,
-            topic: "Ethernet Frames",
-            text: "If 'Type/Length' field is 0x0800, the upper-layer packet header length is 20B to 60B.",
-            options: ["True", "False"],
-            correctAnswer: 0,
-            difficulty: "hard",
-            explanation: "0x0800 indicates IPv4, whose header length is 20-60 bytes depending on options field."
-        },
-        {
-            id: 7,
-            chapter: 2,
-            topic: "FTP Protocol",
-            text: "How many TCP connections are used in FTP?",
-            options: ["1", "2", "3", "4"],
-            correctAnswer: 1,
-            difficulty: "medium",
-            explanation: "FTP uses two TCP connections: control connection (port 21) for commands and data connection (port 20) for data transfer."
-        },
-        {
-            id: 8,
-            chapter: 2,
-            topic: "VLAN Tagging",
-            text: "'Length/Type' 0x8100 indicates VLAN tag.",
-            options: ["True", "False"],
-            correctAnswer: 0,
-            difficulty: "medium",
-            explanation: "Ethernet type 0x8100 indicates an IEEE 802.1Q VLAN tagged frame used for VLAN identification."
-        },
-        {
-            id: 9,
-            chapter: 3,
-            topic: "VRP File Management",
-            text: "Files cannot be permanently deleted using delete /unreserved.",
-            options: ["True", "False"],
-            correctAnswer: 1,
-            difficulty: "easy",
-            explanation: "delete /unreserved DOES permanently delete files from the storage device without moving to recycle bin."
-        },
-        {
-            id: 10,
-            chapter: 3,
-            topic: "VRP Configuration",
-            text: "Changing router name requires System-view.",
-            options: ["True", "False"],
-            correctAnswer: 0,
-            difficulty: "easy",
-            explanation: "System view is required to change the device name using the sysname command in Huawei VRP."
-        },
-        {
-            id: 11,
-            chapter: 4,
-            topic: "IP Addressing",
-            text: "Which of the following is a private IP address?",
-            options: [
-                "192.168.1.1",
-                "8.8.8.8",
-                "203.0.113.1",
-                "198.51.100.1"
-            ],
-            correctAnswer: 0,
-            difficulty: "easy",
-            explanation: "192.168.1.1 is in the private IP range 192.168.0.0/16. Others are public IP addresses."
-        },
-        {
-            id: 12,
-            chapter: 6,
-            topic: "OSPF Basics",
-            text: "OSPF Router ID takes effect immediately after configuration.",
-            options: ["True", "False"],
-            correctAnswer: 1,
-            difficulty: "medium",
-            explanation: "OSPF Router ID changes require OSPF process reset or router reboot to take effect."
         }
-        // Add more questions here to reach 138+ total
+        // Add all 138+ questions here following the same structure
     ];
 }
 
 // Initialize the app when the page loads
-document.addEventListener('DOMContentLoaded', function() {
-    console.log("📄 DOM Content Loaded - Starting HCIA Quiz App");
-    initApp().catch(error => {
-        console.error('❌ Failed to initialize app:', error);
-    });
-});
-
-// Global error handler
-window.addEventListener('error', function(e) {
-    console.error('🚨 Global error:', e.error);
-});
-
-console.log("✅ HCIA Quiz Application Script Loaded");
+document.addEventListener('DOMContentLoaded', initApp);
