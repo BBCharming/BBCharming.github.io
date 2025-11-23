@@ -76,7 +76,7 @@
                 <div class="setting-group">
                     <label for="questionCount">Number of Questions:</label>
                     <select id="questionCount">
-                        <!-- Options loaded dynamically based on quiz type -->
+                        <!-- Options loaded dynamically -->
                     </select>
                 </div>
                 <div class="setting-group">

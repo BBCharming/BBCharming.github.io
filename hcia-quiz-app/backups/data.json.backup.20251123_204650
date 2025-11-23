@@ -1,0 +1,139 @@
+{
+  "questions": [
+    {
+      "id": 1,
+      "chapter": 1,
+      "topic": "Network Communication",
+      "text": "Making a call on a landline telephone is a type of network communication.",
+      "options": ["True", "False"],
+      "correctAnswer": 0,
+      "difficulty": "easy",
+      "explanation": "Landline telephone communication uses circuit-switched networks, which is a form of network communication."
+    },
+    {
+      "id": 2,
+      "chapter": 1,
+      "topic": "OSI Model",
+      "text": "What are the components of the OSI reference model from top to bottom?",
+      "options": [
+        "Application, Presentation, Session, Transport, Network, Data Link, Physical",
+        "Physical, Data Link, Network, Transport, Session, Presentation, Application",
+        "Application, Session, Presentation, Transport, Network, Data Link, Physical",
+        "Physical, Network, Data Link, Transport, Session, Presentation, Application"
+      ],
+      "correctAnswer": 0,
+      "difficulty": "medium",
+      "explanation": "The OSI model layers from top to bottom are: Application, Presentation, Session, Transport, Network, Data Link, Physical."
+    },
+    {
+      "id": 3,
+      "chapter": 1,
+      "topic": "Gateway Configuration",
+      "text": "A gateway must be configured for communication between a host and other hosts.",
+      "options": ["True", "False"],
+      "correctAnswer": 1,
+      "difficulty": "easy",
+      "explanation": "A gateway is only needed when communicating with hosts on different networks. Hosts on the same network can communicate directly without a gateway."
+    },
+    {
+      "id": 4,
+      "chapter": 1,
+      "topic": "Router Functions",
+      "text": "Which statement about routers is false?",
+      "options": [
+        "Routers operate at the network layer",
+        "Routers can connect different network types",
+        "A router cannot isolate broadcast domains",
+        "Routers use IP addresses for forwarding decisions"
+      ],
+      "correctAnswer": 2,
+      "difficulty": "medium",
+      "explanation": "Routers DO isolate broadcast domains - each router interface creates a separate broadcast domain, which is one of their key functions."
+    },
+    {
+      "id": 5,
+      "chapter": 2,
+      "topic": "Network Layer Protocols",
+      "text": "When the host accesses web service, the value of the 'Protocol' field at the network layer is 6.",
+      "options": ["True", "False"],
+      "correctAnswer": 0,
+      "difficulty": "medium",
+      "explanation": "The protocol field value 6 indicates TCP, which is used for web services (HTTP/HTTPS)."
+    },
+    {
+      "id": 6,
+      "chapter": 2,
+      "topic": "Ethernet Frames",
+      "text": "If 'Type/Length' field is 0x0800, the upper-layer packet header length is 20B to 60B.",
+      "options": ["True", "False"],
+      "correctAnswer": 0,
+      "difficulty": "hard",
+      "explanation": "0x0800 indicates IPv4, whose header length is 20-60 bytes depending on options field."
+    },
+    {
+      "id": 7,
+      "chapter": 2,
+      "topic": "FTP Protocol",
+      "text": "How many TCP connections are used in FTP?",
+      "options": ["1", "2", "3", "4"],
+      "correctAnswer": 1,
+      "difficulty": "medium",
+      "explanation": "FTP uses two TCP connections: control connection (port 21) for commands and data connection (port 20) for data transfer."
+    },
+    {
+      "id": 8,
+      "chapter": 2,
+      "topic": "VLAN Tagging",
+      "text": "'Length/Type' 0x8100 indicates VLAN tag.",
+      "options": ["True", "False"],
+      "correctAnswer": 0,
+      "difficulty": "medium",
+      "explanation": "Ethernet type 0x8100 indicates an IEEE 802.1Q VLAN tagged frame used for VLAN identification."
+    },
+    {
+      "id": 9,
+      "chapter": 3,
+      "topic": "VRP File Management",
+      "text": "Files cannot be permanently deleted using delete /unreserved.",
+      "options": ["True", "False"],
+      "correctAnswer": 1,
+      "difficulty": "easy",
+      "explanation": "delete /unreserved DOES permanently delete files from the storage device without moving to recycle bin."
+    },
+    {
+      "id": 10,
+      "chapter": 3,
+      "topic": "VRP Configuration",
+      "text": "Changing router name requires System-view.",
+      "options": ["True", "False"],
+      "correctAnswer": 0,
+      "difficulty": "easy",
+      "explanation": "System view is required to change the device name using the sysname command in Huawei VRP."
+    },
+    {
+      "id": 11,
+      "chapter": 4,
+      "topic": "IP Addressing",
+      "text": "Which of the following is a private IP address?",
+      "options": [
+        "192.168.1.1",
+        "8.8.8.8",
+        "203.0.113.1",
+        "198.51.100.1"
+      ],
+      "correctAnswer": 0,
+      "difficulty": "easy",
+      "explanation": "192.168.1.1 is in the private IP range 192.168.0.0/16. Others are public IP addresses."
+    },
+    {
+      "id": 12,
+      "chapter": 6,
+      "topic": "OSPF Basics",
+      "text": "OSPF Router ID takes effect immediately after configuration.",
+      "options": ["True", "False"],
+      "correctAnswer": 1,
+      "difficulty": "medium",
+      "explanation": "OSPF Router ID changes require OSPF process reset or router reboot to take effect."
+    }
+  ]
+}
