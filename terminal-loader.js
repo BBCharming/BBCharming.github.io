@@ -1,4 +1,5 @@
 <<<<<<< HEAD
+<<<<<<< HEAD
 // GUARANTEED WORKING TERMINAL LOADER
 console.log("🎯 TERMINAL: Starting initialization...");
 
@@ -123,6 +124,45 @@ class PortfolioTerminal {
                     </div>
                 </div>
             </div>
+=======
+// Terminal Loader for Portfolio Website
+console.log("🔧 Loading portfolio terminal...");
+
+class PortfolioTerminal {
+    constructor(containerId) {
+        this.container = document.getElementById(containerId);
+        this.commands = {};
+        this.history = [];
+        this.init();
+    }
+
+    init() {
+        this.setupTerminal();
+        this.setupCommands();
+        this.showWelcome();
+    }
+
+    setupTerminal() {
+        this.container.innerHTML = `
+            <div class="terminal-window">
+                <div class="terminal-header">
+                    <div class="terminal-title">Secure Terminal</div>
+                    <div class="terminal-controls">
+                        <span class="control minimize"></span>
+                        <span class="control maximize"></span>
+                        <span class="control close"></span>
+                    </div>
+                </div>
+                <div class="terminal-body">
+                    <div class="terminal-output" id="termOutput"></div>
+                    <div class="terminal-input-line">
+                        <span class="prompt">visitor@portfolio:~$</span>
+                        <input type="text" class="terminal-input" id="termInput" autocomplete="off" spellcheck="false">
+                        <span class="cursor">|</span>
+                    </div>
+                </div>
+            </div>
+>>>>>>> parent of 77f003a (.)
         `;
 
         this.output = document.getElementById('termOutput');
@@ -310,6 +350,9 @@ class PortfolioTerminal {
 
     showHelp() {
         return `
+<<<<<<< HEAD
+>>>>>>> parent of 77f003a (.)
+=======
 >>>>>>> parent of 77f003a (.)
 Available Commands:
 ──────────────────
@@ -352,6 +395,7 @@ contact   - Go to Contact section
 • 22 chapters coverage
 • Exam simulation mode
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 🎯 Type 'hcia' to launch the quiz application
             `;
@@ -413,6 +457,10 @@ contact   - Go to Contact section
 Type 'hcia' to launch the quiz application
         `;
 >>>>>>> parent of 77f003a (.)
+=======
+Type 'hcia' to launch the quiz application
+        `;
+>>>>>>> parent of 77f003a (.)
     }
 
     clearTerminal() {
@@ -420,6 +468,7 @@ Type 'hcia' to launch the quiz application
         this.showWelcome();
         return 'Terminal cleared.';
     }
+<<<<<<< HEAD
 <<<<<<< HEAD
     
     // Handle input
@@ -460,6 +509,10 @@ console.log("🔧 Terminal loader ready - HELP COMMAND GUARANTEED TO WORK! 🎯"
 =======
 }
 
+=======
+}
+
+>>>>>>> parent of 77f003a (.)
 // Initialize when terminal section is active
 function initPortfolioTerminal() {
     if (document.getElementById('terminalEmbed') && !window.portfolioTerminal) {
@@ -474,4 +527,7 @@ if (window.location.hash === '#terminal') {
 
 // Export for global access
 window.initPortfolioTerminal = initPortfolioTerminal;
+<<<<<<< HEAD
+>>>>>>> parent of 77f003a (.)
+=======
 >>>>>>> parent of 77f003a (.)
