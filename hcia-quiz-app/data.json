@@ -1,0 +1,104 @@
+{
+  "questions": [
+    {
+      "id": 1,
+      "chapter": 1,
+      "chapter_name": "Data Communication Network Basis",
+      "topic": "Network Fundamentals",
+      "type": "true_false",
+      "question": "Making a call on a landline telephone is a type of network communication.",
+      "correct_answer": "True",
+      "explanation": "Traditional telephone systems are indeed a form of network communication, establishing dedicated circuits for voice transmission.",
+      "difficulty": "easy"
+    },
+    {
+      "id": 2,
+      "chapter": 1,
+      "chapter_name": "Data Communication Network Basis",
+      "topic": "Network Devices", 
+      "type": "true_false",
+      "question": "A gateway must be configured for communication between a host and other hosts.",
+      "correct_answer": "False",
+      "explanation": "A gateway is only required when communicating with devices on different networks. Hosts on the same network can communicate directly.",
+      "difficulty": "medium"
+    },
+    {
+      "id": 3,
+      "chapter": 2,
+      "chapter_name": "Network Reference Model",
+      "topic": "Protocol Analysis",
+      "type": "true_false", 
+      "question": "When the host accesses web service of the server, the value of the 'Protocol' field at the network layer is 6.",
+      "correct_answer": "True",
+      "explanation": "The Protocol field value 6 indicates TCP, which is used for web services (HTTP/HTTPS).",
+      "difficulty": "medium"
+    },
+    {
+      "id": 4,
+      "chapter": 4,
+      "chapter_name": "Network Layer Protocols and IP Addressing",
+      "topic": "IP Routing",
+      "type": "true_false",
+      "question": "When forwarding a data packet, a router needs to change the destination IP address of the packet.",
+      "correct_answer": "False", 
+      "explanation": "Routers change the Layer 2 (MAC) address, not the Layer 3 (IP) destination address (except in NAT scenarios).",
+      "difficulty": "medium"
+    },
+    {
+      "id": 5,
+      "chapter": 6,
+      "chapter_name": "OSPF Basics",
+      "topic": "OSPF Fundamentals",
+      "type": "true_false",
+      "question": "A router in the backbone area has complete LSDBs of routers in other areas.",
+      "correct_answer": "False",
+      "explanation": "Backbone area routers have summarized route information, not complete LSDBs from other areas.",
+      "difficulty": "hard"
+    },
+    {
+      "id": 6,
+      "chapter": 8,
+      "chapter_name": "VLAN Principles and Configuration",
+      "topic": "VLAN Basics",
+      "type": "single_choice",
+      "question": "What is the main purpose of VLANs in network design?",
+      "options": [
+        "To increase network bandwidth",
+        "To create broadcast domains within a switch",
+        "To connect different buildings",
+        "To replace routers entirely"
+      ],
+      "correct_answer": "B",
+      "explanation": "VLANs create separate broadcast domains within a single switch, improving network performance and security.",
+      "difficulty": "medium"
+    },
+    {
+      "id": 7,
+      "chapter": 12,
+      "chapter_name": "ACL Principles and Configuration",
+      "topic": "Access Control",
+      "type": "single_choice",
+      "question": "What is the default action of an ACL when no rules match?",
+      "options": [
+        "Permit all",
+        "Deny all", 
+        "Ask for user input",
+        "Log and permit"
+      ],
+      "correct_answer": "B",
+      "explanation": "ACLs have an implicit deny all at the end, meaning if no rules match, the traffic is denied.",
+      "difficulty": "medium"
+    },
+    {
+      "id": 8,
+      "chapter": 19,
+      "chapter_name": "IPv6 Basics",
+      "topic": "IPv6 Addressing",
+      "type": "true_false",
+      "question": "IPv6 addresses are 128 bits long.",
+      "correct_answer": "True",
+      "explanation": "IPv6 addresses are 128 bits long, compared to IPv4's 32 bits, providing a much larger address space.",
+      "difficulty": "easy"
+    }
+  ]
+}
