@@ -3,109 +3,127 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>BB Charming — The Charming Hacker</title>
-    <meta name="description" content="Cybersecurity enthusiast, developer, and tech problem solver">
-    
-    <!-- Core CSS Modules -->
-    <link rel="stylesheet" href="css/main.css">
-    <link rel="stylesheet" href="css/theme.css">
-    <link rel="stylesheet" href="css/layout.css">
-    
-    <!-- Component CSS -->
-    <link rel="stylesheet" href="css/components/navbar.css">
-    <link rel="stylesheet" href="css/components/footer.css">
-    <link rel="stylesheet" href="css/components/cards.css">
-    <link rel="stylesheet" href="css/components/avatar.css">
+    <title>BBCharming - Portfolio</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { 
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #0a0a0f, #111122);
+            color: #e2e8f0;
+        }
+        .container { max-width: 1200px; margin: 0 auto; padding: 20px; }
+        header { text-align: center; padding: 50px 0; }
+        h1 { 
+            font-size: 3em; 
+            background: linear-gradient(135deg, #00d4ff, #a96bff);
+            -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+            margin-bottom: 10px;
+        }
+        .subtitle { color: #94a3b8; font-size: 1.2em; margin-bottom: 30px; }
+        nav { margin: 30px 0; }
+        .nav-links { 
+            display: flex; 
+            justify-content: center; 
+            gap: 30px; 
+            flex-wrap: wrap;
+        }
+        .nav-links a { 
+            color: #00d4ff; 
+            text-decoration: none; 
+            padding: 10px 20px;
+            border: 2px solid #00d4ff;
+            border-radius: 25px;
+            transition: all 0.3s ease;
+        }
+        .nav-links a:hover {
+            background: #00d4ff;
+            color: #0a0a0f;
+        }
+        section { 
+            min-height: 80vh; 
+            padding: 50px 0; 
+            display: none;
+        }
+        section.active { display: block; }
+        .terminal-container {
+            background: #000;
+            border-radius: 10px;
+            padding: 20px;
+            margin-top: 20px;
+        }
+    </style>
+    <script src="terminal-loader.js"></script>
 </head>
-<body class="dark">
-    <!-- Navigation will be injected by JS -->
-    <header id="navbar-placeholder"></header>
-
-    <main>
-        <!-- Hero Section -->
-        <section id="hero" class="hero">
-            <div class="container">
-                <div class="hero-content">
-                    <div class="avatar-3d">
-                        <svg class="avatar" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200">
-                            <defs>
-                                <linearGradient id="g" x1="0" x2="1">
-                                    <stop offset="0" stop-color="#00d4ff"/>
-                                    <stop offset="1" stop-color="#a96bff"/>
-                                </linearGradient>
-                                <filter id="f" x="-50%" y="-50%" width="200%" height="200%">
-                                    <feGaussianBlur stdDeviation="6" result="blur"/>
-                                    <feMerge>
-                                        <feMergeNode in="blur"/>
-                                        <feMergeNode in="SourceGraphic"/>
-                                    </feMerge>
-                                </filter>
-                            </defs>
-                            <rect width="100%" height="100%" rx="24" fill="#070710"/>
-                            <g filter="url(#f)">
-                                <circle cx="100" cy="86" r="42" fill="url(#g)" opacity="0.10"/>
-                            </g>
-                            <circle cx="74" cy="80" r="8" fill="#00d4ff"/>
-                            <circle cx="126" cy="80" r="8" fill="#a96bff"/>
-                            <path d="M60 132c24 18 76 18 120 0" stroke="url(#g)" stroke-width="3" fill="none" opacity="0.7"/>
-                        </svg>
-                    </div>
-                    <h1 class="hero-title glitch" data-text="BB Charming">BB Charming</h1>
-                    <p class="hero-subtitle">Cybersecurity • Development • Hardware</p>
-                    <p class="hero-desc">Welcome to my digital domain. I build, break, and secure systems with charming precision.</p>
-                    <div class="hero-actions">
-                        <a href="#terminal" class="btn btn-primary">Access Terminal</a>
-                        <a href="projects.html" class="btn btn-secondary">View Projects</a>
-                    </div>
+<body>
+    <div class="container">
+        <header>
+            <h1>BBCharming</h1>
+            <div class="subtitle">Developer & Network Engineer</div>
+            <nav>
+                <div class="nav-links">
+                    <a href="#home">Home</a>
+                    <a href="#about">About</a>
+                    <a href="#projects">Projects</a>
+                    <a href="#terminal">Terminal</a>
+                    <a href="#contact">Contact</a>
                 </div>
+            </nav>
+        </header>
+
+        <section id="home" class="active">
+            <h2>Welcome</h2>
+            <p>Network security professional and developer specializing in HCIA-Datacom certification preparation.</p>
+        </section>
+
+        <section id="about">
+            <h2>About Me</h2>
+            <p>Information about your background and skills.</p>
+        </section>
+
+        <section id="projects">
+            <h2>Projects</h2>
+            <p>Your projects portfolio.</p>
+        </section>
+
+        <section id="terminal">
+            <h2>Terminal</h2>
+            <p>Access the secure terminal interface.</p>
+            <div class="terminal-container" id="terminalEmbed">
+                <!-- Terminal will be loaded here -->
             </div>
         </section>
 
-        <!-- Terminal Section -->
-        <section id="terminal" class="terminal-section">
-            <div class="container">
-                <div class="terminal-container">
-                    <div class="terminal-header">
-                        <div class="terminal-dots">
-                            <span class="dot red"></span>
-                            <span class="dot yellow"></span>
-                            <span class="dot green"></span>
-                        </div>
-                        <span class="terminal-title">root@charming:~</span>
-                    </div>
-                    <div class="terminal-body">
-                        <div id="terminal-output" class="terminal-output">
-                            <div class="terminal-line">$ Initializing BB Charming system...</div>
-                            <div class="terminal-line">$ Loading cyber protocols...</div>
-                            <div class="terminal-line">$ Status: <span class="success">ACTIVE</span></div>
-                            <div class="terminal-line">$ Type 'help' for available commands</div>
-                        </div>
-                        <div class="terminal-input-line">
-                            <span class="prompt">$</span>
-                            <input type="text" id="terminal-input" class="terminal-input" autocomplete="off" placeholder="type 'help' for commands">
-                        </div>
-                    </div>
-                </div>
-            </div>
+        <section id="contact">
+            <h2>Contact</h2>
+            <p>How to get in touch.</p>
         </section>
+    </div>
 
-        <!-- Featured Projects Preview -->
-        <section class="projects-preview">
-            <div class="container">
-                <h2 class="section-title">Featured Operations</h2>
-                <div class="cards-grid" id="featured-projects">
-                    <!-- Projects injected by JS -->
-                </div>
-            </div>
-        </section>
-    </main>
+    <script>
+        // Simple navigation
+        function showSection(sectionId) {
+            document.querySelectorAll('section').forEach(section => {
+                section.classList.remove('active');
+            });
+            document.getElementById(sectionId).classList.add('active');
+            
+            // Load terminal when terminal section is activated
+            if (sectionId === 'terminal') {
+                if (typeof initPortfolioTerminal === 'function') {
+                    setTimeout(initPortfolioTerminal, 100);
+                }
+            }
+        }
 
-    <!-- Footer will be injected by JS -->
-    <footer id="footer-placeholder"></footer>
+        // Handle URL hash changes
+        window.addEventListener('hashchange', function() {
+            const sectionId = window.location.hash.substring(1) || 'home';
+            showSection(sectionId);
+        });
 
-    <!-- Core JS Modules -->
-    <script type="module" src="js/main.js"></script>
-    <script type="module" src="js/terminal.js"></script>
-    <script type="module" src="js/animations.js"></script>
+        // Initial load
+        const initialSection = window.location.hash.substring(1) || 'home';
+        showSection(initialSection);
+    </script>
 </body>
 </html>
