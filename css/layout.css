@@ -46,13 +46,23 @@
     padding: var(--space-xl) 0;
     background: var(--bg-secondary);
 }
+/* Terminal Section - Updated to be hidden by default */
+.terminal-section {
+    padding: var(--space-xl) 0;
+    background: var(--bg-secondary);
+    display: none; /* This hides it initially */
+    opacity: 0;
+}
 
-.terminal-container {
-    background: var(--bg-tertiary);
-    border-radius: var(--radius-md);
-    overflow: hidden;
-    border: 1px solid var(--accent-primary);
-    box-shadow: 0 0 30px rgba(0, 212, 255, 0.2);
+/* New class to show the terminal */
+.terminal-section.is-visible {
+    display: block;
+    animation: fadeInTerminal 0.5s ease forwards;
+}
+
+@keyframes fadeInTerminal {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
 }
 
 .terminal-header {

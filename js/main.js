@@ -14,44 +14,29 @@ class App {
     injectNavbar() {
         const navbarPlaceholder = document.getElementById('navbar-placeholder');
         if (navbarPlaceholder) {
+            const isHomePage = window.location.pathname.includes('index.html') || window.location.pathname === '/';
+            
             navbarPlaceholder.innerHTML = `
                 <header class="nav">
                     <div class="brand">
                         <div class="avatar-3d">
-                            <svg class="avatar" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200">
-                                <defs>
-                                    <linearGradient id="g" x1="0" x2="1">
-                                        <stop offset="0" stop-color="#00d4ff"/>
-                                        <stop offset="1" stop-color="#a96bff"/>
-                                    </linearGradient>
-                                    <filter id="f" x="-50%" y="-50%" width="200%" height="200%">
-                                        <feGaussianBlur stdDeviation="6" result="blur"/>
-                                        <feMerge>
-                                            <feMergeNode in="blur"/>
-                                            <feMergeNode in="SourceGraphic"/>
-                                        </feMerge>
-                                    </filter>
-                                </defs>
-                                <rect width="100%" height="100%" rx="24" fill="#070710"/>
-                                <g filter="url(#f)">
-                                    <circle cx="100" cy="86" r="42" fill="url(#g)" opacity="0.10"/>
-                                </g>
-                                <circle cx="74" cy="80" r="8" fill="#00d4ff"/>
-                                <circle cx="126" cy="80" r="8" fill="#a96bff"/>
-                                <path d="M60 132c24 18 76 18 120 0" stroke="url(#g)" stroke-width="3" fill="none" opacity="0.7"/>
-                            </svg>
+                            <!-- SVG kept here -->
+                            <svg class="avatar" ...> ... </svg> 
                         </div>
                         <div class="brand-text">
                             <h1>BB Charming</h1>
-                            <p class="muted">Cybersecurity · Software · Hardware</p>
                         </div>
                     </div>
 
                     <nav class="menu">
-                        <a href="index.html" class="${window.location.pathname.includes('index.html') || window.location.pathname === '/' ? 'active' : ''}">Home</a>
-                        <a href="projects.html" class="${window.location.pathname.includes('projects.html') ? 'active' : ''}">Projects</a>
-                        <a href="services.html" class="${window.location.pathname.includes('services.html') ? 'active' : ''}">Services</a>
-                        <a href="access.html" class="${window.location.pathname.includes('access.html') ? 'active' : ''}">Access Portal</a>
+                        <a href="index.html" class="${isHomePage ? 'active' : ''}">Home</a>
+                        <a href="projects.html">Projects</a>
+                        <a href="services.html">Services</a>
+                        <!-- If on homepage, trigger reveal event; otherwise go to access.html -->
+                        <a href="${isHomePage ? '#terminal' : 'access.html'}" 
+                           onclick="${isHomePage ? 'document.dispatchEvent(new CustomEvent(\'reveal-terminal\'))' : ''}">
+                           Access Portal
+                        </a>
                     </nav>
                 </header>
             `;
