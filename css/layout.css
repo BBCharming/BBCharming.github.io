@@ -42,26 +42,21 @@
 }
 
 /* Terminal Section */
+/* Update this block in layout.css */
 .terminal-section {
     padding: var(--space-xl) 0;
     background: var(--bg-secondary);
-}
-/* Terminal Section - Updated to be hidden by default */
-.terminal-section {
-    padding: var(--space-xl) 0;
-    background: var(--bg-secondary);
-    display: none; /* This hides it initially */
-    opacity: 0;
+    display: none; /* Add this line to hide it by default */
 }
 
-/* New class to show the terminal */
-.terminal-section.is-visible {
+/* Add this new block below it */
+.terminal-section.revealed {
     display: block;
-    animation: fadeInTerminal 0.5s ease forwards;
+    animation: terminalFadeIn 0.5s ease-out;
 }
 
-@keyframes fadeInTerminal {
-    from { opacity: 0; transform: translateY(20px); }
+@keyframes terminalFadeIn {
+    from { opacity: 0; transform: translateY(30px); }
     to { opacity: 1; transform: translateY(0); }
 }
 
