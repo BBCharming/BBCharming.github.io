@@ -3,27 +3,37 @@ class Terminal {
         this.container = document.getElementById('terminal');
         this.input = document.getElementById('terminal-input');
         this.output = document.getElementById('terminal-output');
-        this.triggerBtn = document.querySelector('a[href="#terminal"]');
+        
+        // Target specifically the button in the hero section
+        this.triggerBtn = document.querySelector('.hero-actions .btn-primary');
         
         this.commands = {
             'help': this.showHelp,
             'clear': this.clearTerminal,
             'about': this.showAbout,
             'projects': this.showProjects,
+            'services': this.showServices,
+            'contact': this.showContact,
             'status': this.showStatus,
             'hcia': this.launchHCIACourse,
-            // ... add your other commands here
+            './HCIA-Datacom-Quiz': this.launchHCIACourse,
+            'echo': this.echoText,
+            'date': this.showDate,
+            'whoami': this.showUser
         };
         
         this.init();
     }
 
     init() {
-        // Handle the "Access Terminal" button click
+        // Only trigger reveal when the specific HERO button is clicked
         if (this.triggerBtn) {
             this.triggerBtn.addEventListener('click', (e) => {
-                e.preventDefault(); // Stop the page from jumping instantly
-                this.revealTerminal();
+                // If the link is #terminal, handle it via JS
+                if (this.triggerBtn.getAttribute('href') === '#terminal') {
+                    e.preventDefault();
+                    this.revealTerminal();
+                }
             });
         }
 
@@ -36,57 +46,17 @@ class Terminal {
     }
 
     revealTerminal() {
-        // 1. Show the hidden section
+        // Add the revealed class we created in layout.css
         this.container.classList.add('revealed');
         
-        // 2. Clear previous output and show welcome message once
-        this.output.innerHTML = '';
-        this.showWelcome();
-        
-        // 3. Smoothly scroll to the terminal
+        // Smooth scroll
         this.container.scrollIntoView({ behavior: 'smooth' });
         
-        // 4. Focus the input so the user can type immediately
+        // Focus cursor
         setTimeout(() => this.input.focus(), 600);
     }
 
-    showWelcome() {
-        this.addLine('<span class="success">$ BB Charming OS initialized...</span>');
-        this.addLine('$ Type "help" for a list of commands.');
-    }
-
-    addLine(text) {
-        const line = document.createElement('div');
-        line.className = 'terminal-line';
-        line.innerHTML = text;
-        this.output.appendChild(line);
-        this.scrollToBottom();
-    }
-
-    processCommand(cmd) {
-        if (!cmd) return;
-        this.addLine(`<span class="accent">$ ${cmd}</span>`);
-        const handler = this.commands[cmd.toLowerCase()];
-        if (handler) {
-            handler.call(this);
-        } else {
-            this.addLine(`Command not found: ${cmd}`);
-        }
-    }
-
-    scrollToBottom() {
-        this.output.scrollTop = this.output.scrollHeight;
-    }
-
-    showHelp() {
-        this.addLine('Available: help, about, projects, status, hcia, clear');
-    }
-
-    clearTerminal() {
-        this.output.innerHTML = '';
-    }
-
-    // ... (Keep your other existing command functions like showAbout, showStatus, etc.)
+    // ... Keep all your existing addLine, showHelp, and command functions below ...
 }
 
 document.addEventListener('DOMContentLoaded', () => {
