@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HCIA-Datacom Quiz - BB Charming</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <header class="header">
+            <h1>HCIA-Datacom Quiz</h1>
+            <div class="progress">
+                <span id="progressText">0% Complete</span>
+                <div class="progress-bar">
+                    <div class="progress-fill" id="progressFill"></div>
+                </div>
+            </div>
+        </header>
+
+        <!-- Main Menu -->
+        <div id="mainMenu" class="screen active">
+            <div class="menu-card">
+                <h2>Welcome to HCIA-Datacom Prep</h2>
+                <p class="menu-subtitle">Select your quiz type:</p>
+                <div class="menu-options">
+                    <button class="btn-primary" onclick="startChapterQuiz()">
+                        📚 Chapter Quiz
+                    </button>
+                    <button class="btn-secondary" onclick="startRandomQuiz()">
+                        🎲 Random Quiz
+                    </button>
+                    <button class="btn-secondary" onclick="startExam()">
+                        ⚡ Final Exam
+                    </button>
+                </div>
+                <div class="menu-footer">
+                    <p>22 Chapters • 138+ Questions • Progress Tracking</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Chapter Selection -->
+        <div id="chapterSelection" class="screen">
+            <div class="screen-header">
+                <button class="btn-back" onclick="showMainMenu()">← Back</button>
+                <h2>Select Chapter</h2>
+            </div>
+            <div class="chapters-grid" id="chaptersGrid">
+                <!-- Chapters loaded dynamically -->
+            </div>
+        </div>
+
+        <!-- Quiz Settings -->
+        <div id="quizSettings" class="screen">
+            <div class="screen-header">
+                <button class="btn-back" onclick="showChapterSelection()">← Back</button>
+                <h2 id="settingsTitle">Quiz Settings</h2>
+            </div>
+            <div class="settings-card">
+                <label for="questionCount">Number of Questions:</label>
+                <select id="questionCount">
+                    <option value="5">5 Questions</option>
+                    <option value="10" selected>10 Questions</option>
+                    <option value="15">15 Questions</option>
+                    <option value="20">20 Questions</option>
+                </select>
+                <button class="btn-primary" onclick="startQuiz()">Start Quiz</button>
+            </div>
+        </div>
+
+        <!-- Quiz Screen -->
+        <div id="quizScreen" class="screen">
+            <div class="quiz-header">
+                <div class="quiz-info">
+                    <span id="quizType">Chapter Quiz</span>
+                    <span id="questionCounter">1/10</span>
+                </div>
+                <div class="progress-bar small">
+                    <div class="progress-fill" id="quizProgress"></div>
+                </div>
+            </div>
+
+            <div class="question-card">
+                <div class="question-text" id="questionText"></div>
+                <div class="options-container" id="optionsContainer">
+                    <!-- Options loaded dynamically -->
+                </div>
+            </div>
+
+            <div class="quiz-controls">
+                <button class="btn-secondary" onclick="previousQuestion()" id="prevBtn">Previous</button>
+                <button class="btn-primary" onclick="nextQuestion()" id="nextBtn">Next</button>
+                <button class="btn-primary hidden" onclick="showResults()" id="finishBtn">Finish</button>
+            </div>
+        </div>
+
+        <!-- Results Screen -->
+        <div id="resultsScreen" class="screen">
+            <div class="results-card">
+                <h2>Quiz Results</h2>
+                <div class="score" id="finalScore">0/0</div>
+                <div class="score-percentage" id="scorePercentage">0%</div>
+                <div class="results-message" id="resultsMessage"></div>
+                
+                <div class="results-details">
+                    <h3>Review Answers</h3>
+                    <div id="resultsList"></div>
+                </div>
+
+                <div class="results-actions">
+                    <button class="btn-secondary" onclick="retryQuiz()">Retry Quiz</button>
+                    <button class="btn-primary" onclick="showMainMenu()">Main Menu</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>

@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Access Portal - BB Charming</title>
+    <link rel="stylesheet" href="css/main.css">
+    <link rel="stylesheet" href="css/theme.css">
+    <link rel="stylesheet" href="css/layout.css">
+    <link rel="stylesheet" href="css/pages/access.css">
+</head>
+<body class="dark portal">
+    <main>
+        <div class="access-container">
+            <div class="portal-card">
+                <div class="portal-header">
+                    <h1>Access Portal</h1>
+                    <p>For those who dare to chase the tale of the Charming Hacker</p>
+                </div>
+                
+                <div class="portal-terminal">
+                    <div class="portal-output" id="portalOutput">
+                        <div class="portal-line">$ Initializing secure connection...</div>
+                        <div class="portal-line">$ BB Charming Access Portal v1.0</div>
+                        <div class="portal-line">$ Enter passphrase to continue</div>
+                    </div>
+                    <div class="portal-input-line">
+                        <span class="portal-prompt">></span>
+                        <input type="password" id="portalInput" class="portal-input" placeholder="Enter access code..." autocomplete="off">
+                    </div>
+                </div>
+                
+                <div class="portal-hint">
+                    <p>💡 Hint: Try "charming" or "hacker"</p>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <script src="js/pages/access.js"></script>
+</body>
+</html>
