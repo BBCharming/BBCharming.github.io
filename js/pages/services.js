@@ -29,7 +29,7 @@ class ServicesPage {
                     "SEO friendly",
                     "Maintenance support"
                 ],
-                price: "Starting at $300",
+                price: "Starting at K300",
                 action: "Start Project"
             },
             {
@@ -51,15 +51,15 @@ class ServicesPage {
                 id: 4,
                 icon: "🎓",
                 title: "Training & Tutoring",
-                description: "Personalized training sessions for HCIA-Datacom certification and cybersecurity fundamentals.",
+                description: "Personalized training for Programming, Web Technologies and other fundamental CS skills.",
                 features: [
-                    "HCIA-Datacom preparation",
-                    "Cybersecurity basics",
-                    "Hands-on labs",
-                    "Progress tracking",
+                    "C++ ",
+                    "Java",
+                    "Python",
+                    "Web Technologied (github, html, css, JavaScript,...)",
                     "Exam simulation"
                 ],
-                price: "$30/hour",
+                price: "K30/month",
                 action: "Book Session"
             }
         ];
