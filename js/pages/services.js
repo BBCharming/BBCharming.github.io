@@ -60,7 +60,8 @@ class ServicesPage {
                     "Exam simulation"
                 ],
                 price: "K30/month",
-                action: "Book Session"
+                action: "Book Session",
+                link: "https://thecharmingprogrammer.com"
             }
         ];
         
@@ -93,10 +94,15 @@ class ServicesPage {
                 
                 <div class="service-price">${service.price}</div>
                 
-                <div class="service-actions">
-                    <button class="service-btn primary" onclick="ServicesPage.contactAboutService('${service.title}')">
-                        ${service.action}
-                    </button>
+               <div class="service-actions">
+                    ${service.link 
+                        ? `<a href="${service.link}" target="_blank" rel="noopener noreferrer" class="service-btn primary">
+                                ${service.action}
+                           </a>`
+                        : `<button class="service-btn primary" onclick="ServicesPage.contactAboutService('${service.title}')">
+                                ${service.action}
+                           </button>`
+                    }
                     <button class="service-btn secondary" onclick="ServicesPage.learnMore('${service.id}')">
                         Learn More
                     </button>
